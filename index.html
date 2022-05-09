@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip clock animation tutorial</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="flip-clock">
+      <!-- TODO hours -->
+      <!-- TODO minutes -->
+      <!-- TODO seconds -->
+
+      <div class="seconds">
+        <!-- Seconds first and last digits -->
+        <div class="flip seconds-last play">
+          <!-- * for the seconds last digit-->
+          <input type="hidden" />
+          <!-- for tracking the value changes -->
+          <div class="flip-display">
+            <div class="flip-display-top">5</div>
+            <div class="flip-display-bottom">5</div>
+          </div>
+          <div class="flipper">
+            <div class="flipper-top">5</div>
+            <div class="flipper-bottom">5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

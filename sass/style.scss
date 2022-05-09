@@ -1,0 +1,172 @@
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; // 1rem = 10px (10px/16px = 62.5%)
+    box-sizing: border-box;
+}
+
+/* Lets define some CSS vars */
+:root {
+    --flip-height: 10rem;
+    --flip-width: calc(var(--flip-height) * 0.6);
+    --line-height: calc(var(--flip-height) * 0.5);
+    --flip-container-color: #171717;
+    --flip-color: #171717;
+    --flip-text-color: #efefef;
+    --flip-border-radius: calc(var(--flip-height) * 0.05);
+    --animation-time: 0.8s;
+    --animation-ease: linear;
+    --perspective: 20rem;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.flip {
+    height: var(--flip-height);
+    width: var(--flip-width);
+    border-radius: var(--flip-border-radius);
+    font: {
+        size: calc(var(--flip-height) * 0.5); // Half size of the flip height
+        weight: 700;
+    }
+    position: relative;
+
+
+    &-display {
+        height: var(--flip-height);
+        width: var(--flip-width);
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+       
+
+        &-top, &-bottom {
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            width: 100%;
+            height: calc(var(--flip-height) * 0.5); // Half size of the flip height
+            background-color: var(--flip-container-color);
+            color: var(--flip-text-color);
+            line-height: calc(var(--line-height) * var(--i)); // Property i will be defined later
+
+
+
+        }
+
+        &-top {
+            // Based on the i property we'll align the line-height
+            --i: 2;
+            border-top-left-radius: var(--flip-border-radius);
+            border-top-right-radius: var(--flip-border-radius);
+            
+        }
+
+        &-bottom {
+           --i: 0;
+           border-bottom-left-radius: var(--flip-border-radius);      border-bottom-right-radius: var(--flip-border-radius);
+        }
+    }
+
+    & .flipper {
+        // This is positioned on top of the flip display so that they are stacked upon each other
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        //background-color: rgba(255, 0, 0, 0.75);
+        left: 0;
+        right: 0;
+        margin: auto;
+        height: var(--flip-height);
+        width: var(--flip-width);
+        perspective: var(--perspective);
+
+        &-top, &-bottom {
+            position: absolute;
+            left: -10%; // negative percentage for better alignment
+            right: -10%;
+            height: calc(var(--flip-height) *.5);
+            width: var(--flip-width);
+            margin: auto;
+            text-align: center;
+            line-height: calc(var(--line-height) * var(--i));
+            overflow: hidden;
+            background-color: var(--flip-color);
+            color: var(--flip-text-color);
+
+        }
+
+        // Now we need to align the flipper line height to match with the file display line heights
+        &-top {
+            --i: 2;
+            //background-color: pink;
+            top: 0;
+            transform-origin: bottom;
+            transform: rotateX(-90deg);
+            // We'll animate the top part from 0deg to -90deg
+            border-top-left-radius: var(--flip-border-radius);
+            border-top-right-radius: var(--flip-border-radius);
+        }
+
+        &-bottom {
+            --i: 0;
+            //background-color: yellow;
+            // Flipper bottom part is visible so we need to rotate it to 90deg via X
+            transform: rotateX(90deg);
+            // Now transform the origin to top
+            transform-origin: top;
+            bottom: 0;
+            // During animation we'll need to rotate from 90deg to 0deg
+            border-bottom-left-radius: var(--flip-border-radius);
+            border-bottom-right-radius: var(--flip-border-radius);
+        }
+
+    }
+
+    // By adding a play class we'll animate the flipper
+    &.play {
+    
+        & .flipper-top {
+            animation: flipperTopAnimation var(--animation-time) var(--animation-ease);
+        }
+    
+        & .flipper-bottom {
+            animation: flipperBottomAnimation var(--animation-time) var(--animation-ease);
+        }
+    
+    }
+}
+
+@keyframes flipperTopAnimation {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50%, 100% {
+        transform: rotateX(-90deg);
+    }
+}
+
+@keyframes flipperBottomAnimation {
+    0%, 50% {
+        transform: rotateX(90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
