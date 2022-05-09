@@ -37,6 +37,16 @@ body {
     height: 100vh;
 }
 
+.flip-clock {
+    display: flex;
+
+    .hours, .minutes, .seconds {
+        display: inline-flex;
+        margin: 0 0.5rem;
+        column-gap: 0.3rem;
+    }
+
+
 .flip {
     height: var(--flip-height);
     width: var(--flip-width);
@@ -151,6 +161,7 @@ body {
         }
     
     }
+}
 }
 
 @keyframes flipperTopAnimation {

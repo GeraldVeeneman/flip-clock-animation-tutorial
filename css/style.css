@@ -37,7 +37,15 @@ body {
   height: 100vh;
 }
 
-.flip {
+.flip-clock {
+  display: flex;
+}
+.flip-clock .hours, .flip-clock .minutes, .flip-clock .seconds {
+  display: inline-flex;
+  margin: 0 0.5rem;
+  column-gap: 0.3rem;
+}
+.flip-clock .flip {
   height: var(--flip-height);
   width: var(--flip-width);
   border-radius: var(--flip-border-radius);
@@ -45,14 +53,14 @@ body {
   font-weight: 700;
   position: relative;
 }
-.flip-display {
+.flip-clock .flip-display {
   height: var(--flip-height);
   width: var(--flip-width);
   display: flex;
   flex-direction: column;
   z-index: 1;
 }
-.flip-display-top, .flip-display-bottom {
+.flip-clock .flip-display-top, .flip-clock .flip-display-bottom {
   position: relative;
   text-align: center;
   overflow: hidden;
@@ -62,17 +70,17 @@ body {
   color: var(--flip-text-color);
   line-height: calc(var(--line-height) * var(--i));
 }
-.flip-display-top {
+.flip-clock .flip-display-top {
   --i: 2;
   border-top-left-radius: var(--flip-border-radius);
   border-top-right-radius: var(--flip-border-radius);
 }
-.flip-display-bottom {
+.flip-clock .flip-display-bottom {
   --i: 0;
   border-bottom-left-radius: var(--flip-border-radius);
   border-bottom-right-radius: var(--flip-border-radius);
 }
-.flip .flipper {
+.flip-clock .flip .flipper {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -83,7 +91,7 @@ body {
   width: var(--flip-width);
   perspective: var(--perspective);
 }
-.flip .flipper-top, .flip .flipper-bottom {
+.flip-clock .flip .flipper-top, .flip-clock .flip .flipper-bottom {
   position: absolute;
   left: -10%;
   right: -10%;
@@ -96,7 +104,7 @@ body {
   background-color: var(--flip-color);
   color: var(--flip-text-color);
 }
-.flip .flipper-top {
+.flip-clock .flip .flipper-top {
   --i: 2;
   top: 0;
   transform-origin: bottom;
@@ -104,7 +112,7 @@ body {
   border-top-left-radius: var(--flip-border-radius);
   border-top-right-radius: var(--flip-border-radius);
 }
-.flip .flipper-bottom {
+.flip-clock .flip .flipper-bottom {
   --i: 0;
   transform: rotateX(90deg);
   transform-origin: top;
@@ -112,10 +120,10 @@ body {
   border-bottom-left-radius: var(--flip-border-radius);
   border-bottom-right-radius: var(--flip-border-radius);
 }
-.flip.play .flipper-top {
+.flip-clock .flip.play .flipper-top {
   animation: flipperTopAnimation var(--animation-time) var(--animation-ease);
 }
-.flip.play .flipper-bottom {
+.flip-clock .flip.play .flipper-bottom {
   animation: flipperBottomAnimation var(--animation-time) var(--animation-ease);
 }
 

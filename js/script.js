@@ -27,20 +27,31 @@ $(document).ready(function () {
 
   $(".flip-clock").each(function (_, flipClock) {
 
-    // Let's create the handles for the seconds-last
+    // Let's create the handles for the last and first digits of the seconds, minutes and hours
     const secondsLast = createHandles($(flipClock).find(".seconds-last"));
+    const secondsFirst = createHandles($(flipClock).find(".seconds-first"));
+    const minutesLast = createHandles($(flipClock).find(".minutes-last"));
+    const minutesFirst = createHandles($(flipClock).find(".minutes-first"));
+    const hoursLast = createHandles($(flipClock).find(".hours-last"));
+    const hoursFirst = createHandles($(flipClock).find(".hours-first"));
+
     const initialTime = generateTimeInfo();
     setInitialValues(secondsLast, initialTime.seconds.lastDigit);
-
+    setInitialValues(secondsFirst, initialTime.seconds.firstDigit);
+    setInitialValues(minutesLast, initialTime.minutes.lastDigit);
+    setInitialValues(minutesFirst, initialTime.minutes.firstDigit);
+    setInitialValues(hoursLast, initialTime.hours.lastDigit);
+    setInitialValues(hoursFirst, initialTime.hours.firstDigit);
     // TODO Here we need to run the setInterval function
-   clock=setInterval(() => {
+   setInterval(() => {
       const time = generateTimeInfo();
       // TODO -> Now we need to call the flipDigit function
       flipDigit(secondsLast, time.seconds.lastDigit);
-
-      if (time.seconds.lastDigit == 6) {
-        clearInterval(clock);
-      }
+      flipDigit(secondsFirst, time.seconds.firstDigit);
+      flipDigit(minutesLast, time.minutes.lastDigit);
+      flipDigit(minutesFirst, time.minutes.firstDigit);
+      flipDigit(hoursLast, time.hours.lastDigit);
+      flipDigit(hoursFirst, time.hours.firstDigit);
     }, 1000);
 
   });
