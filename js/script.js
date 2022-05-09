@@ -58,7 +58,7 @@ $(document).ready(function () {
 
   // TODO Create a function to set the initial values
   function setInitialValues(flipHandles, initialValue) {
-    // flipHandler is the object that holds the DOM refs for the child elements.
+    // flipHandles is the object that holds the DOM refs for the child elements.
     // Destructuring the handles
     const {
       flipDisplayTop,
@@ -77,7 +77,6 @@ $(document).ready(function () {
 
   // TODO Create a function that generates handles for the nested children elements
   function createHandles(flipElement) {
-    // flipElement is the jQuery selector for the flip element,... I'm trying to pass the seconds-last class -> and create the handles for the child elements
     const flipperTop = flipElement.find(".flipper-top");
     const flipperBottom = flipElement.find(".flipper-bottom");
     const flipDisplayTop = flipElement.find(".flip-display-top");
