@@ -33,10 +33,14 @@ $(document).ready(function () {
     setInitialValues(secondsLast, initialTime.seconds.lastDigit);
 
     // TODO Here we need to run the setInterval function
-    setInterval(() => {
+   clock=setInterval(() => {
       const time = generateTimeInfo();
       // TODO -> Now we need to call the flipDigit function
       flipDigit(secondsLast, time.seconds.lastDigit);
+
+      if (time.seconds.lastDigit == 6) {
+        clearInterval(clock);
+      }
     }, 1000);
 
   });
