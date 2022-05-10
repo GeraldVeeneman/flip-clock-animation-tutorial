@@ -1,3 +1,15 @@
+/* Colours */
+:root {
+  --grayish-blue: hsl(237, 18%, 59%);
+  --soft-red: hsl(345, 95%, 68%);
+  --white: hsl(0, 0%, 100%);
+  --dark-desaturated-blue: hsl(236, 21%, 26%);
+  --very-dark-blue: hsl(235, 16%, 14%);
+  --very-dark-mostly-black-blue: hsl(234, 17%, 12%);
+}
+
+/* Typography */
+/* Fonts */
 /* Global reset */
 * {
   margin: 0;
@@ -17,12 +29,12 @@ html {
 
 /* Lets define some CSS vars */
 :root {
-  --flip-height: 10rem;
-  --flip-width: calc(var(--flip-height) * 0.6);
+  --flip-height: 7rem;
+  --flip-width: 3.5rem;
   --line-height: calc(var(--flip-height) * 0.5);
-  --flip-container-color: #171717;
-  --flip-color: #171717;
-  --flip-text-color: #efefef;
+  --flip-container-color: var(--dark-desaturated-blue);
+  --flip-color: var(--dark-desaturated-blue);
+  --flip-text-color: var(--soft-red);
   --flip-border-radius: calc(var(--flip-height) * 0.05);
   --animation-time: 0.8s;
   --animation-ease: linear;
@@ -34,18 +46,53 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100vw;
   height: 100vh;
+  font-family: "Red Hat Text", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background-color: var(--very-dark-mostly-black-blue);
+  background-image: url("../images/pattern-hills.svg"), url("../images/bg-stars.svg");
+  background-repeat: no-repeat;
+  background-position: 82% 100%, center center;
+  background-size: 1200px, cover;
 }
 
-.flip-clock {
+.container {
+  padding: 14rem 2.5rem 5rem;
   display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
-.flip-clock .hours, .flip-clock .minutes, .flip-clock .seconds {
+.container .header {
+  color: var(--white);
+  font-size: 1.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  margin-bottom: 6rem;
+}
+.container .flip-clock {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.container .flip-clock .days,
+.container .flip-clock .hours,
+.container .flip-clock .minutes,
+.container .flip-clock .seconds {
   display: inline-flex;
-  margin: 0 0.5rem;
-  column-gap: 0.3rem;
 }
-.flip-clock .flip {
+.container .flip-clock .desc {
+  justify-self: center;
+  color: var(--grayish-blue);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+}
+.container .flip-clock .flip {
   height: var(--flip-height);
   width: var(--flip-width);
   border-radius: var(--flip-border-radius);
@@ -53,14 +100,14 @@ body {
   font-weight: 700;
   position: relative;
 }
-.flip-clock .flip-display {
+.container .flip-clock .flip-display {
   height: var(--flip-height);
   width: var(--flip-width);
   display: flex;
   flex-direction: column;
   z-index: 1;
 }
-.flip-clock .flip-display-top, .flip-clock .flip-display-bottom {
+.container .flip-clock .flip-display-top, .container .flip-clock .flip-display-bottom {
   position: relative;
   text-align: center;
   overflow: hidden;
@@ -70,17 +117,17 @@ body {
   color: var(--flip-text-color);
   line-height: calc(var(--line-height) * var(--i));
 }
-.flip-clock .flip-display-top {
+.container .flip-clock .flip-display-top {
   --i: 2;
   border-top-left-radius: var(--flip-border-radius);
   border-top-right-radius: var(--flip-border-radius);
 }
-.flip-clock .flip-display-bottom {
+.container .flip-clock .flip-display-bottom {
   --i: 0;
   border-bottom-left-radius: var(--flip-border-radius);
   border-bottom-right-radius: var(--flip-border-radius);
 }
-.flip-clock .flip .flipper {
+.container .flip-clock .flip .flipper {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -91,7 +138,7 @@ body {
   width: var(--flip-width);
   perspective: var(--perspective);
 }
-.flip-clock .flip .flipper-top, .flip-clock .flip .flipper-bottom {
+.container .flip-clock .flip .flipper-top, .container .flip-clock .flip .flipper-bottom {
   position: absolute;
   left: -10%;
   right: -10%;
@@ -104,7 +151,7 @@ body {
   background-color: var(--flip-color);
   color: var(--flip-text-color);
 }
-.flip-clock .flip .flipper-top {
+.container .flip-clock .flip .flipper-top {
   --i: 2;
   top: 0;
   transform-origin: bottom;
@@ -112,7 +159,7 @@ body {
   border-top-left-radius: var(--flip-border-radius);
   border-top-right-radius: var(--flip-border-radius);
 }
-.flip-clock .flip .flipper-bottom {
+.container .flip-clock .flip .flipper-bottom {
   --i: 0;
   transform: rotateX(90deg);
   transform-origin: top;
@@ -120,11 +167,18 @@ body {
   border-bottom-left-radius: var(--flip-border-radius);
   border-bottom-right-radius: var(--flip-border-radius);
 }
-.flip-clock .flip.play .flipper-top {
+.container .flip-clock .flip.play .flipper-top {
   animation: flipperTopAnimation var(--animation-time) var(--animation-ease);
 }
-.flip-clock .flip.play .flipper-bottom {
+.container .flip-clock .flip.play .flipper-bottom {
   animation: flipperBottomAnimation var(--animation-time) var(--animation-ease);
+}
+.container .footer {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 3.5rem;
 }
 
 @keyframes flipperTopAnimation {

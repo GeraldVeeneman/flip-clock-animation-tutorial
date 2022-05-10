@@ -7,95 +7,138 @@
     <title>Flip clock animation tutorial</title>
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@700&display=swap" rel="stylesheet"> 
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="flip-clock">
-      <!-- TODO hours -->
-      <div class="hours">
-        <!-- Hours first -->
-        <div class="flip hours-first">          
-          <input type="hidden" />
-          <div class="flip-display">
-            <div class="flip-display-top">5</div>
-            <div class="flip-display-bottom">5</div>
+  <div class="container">
+    <header class="header">We're launching soon</header> 
+      <div class="flip-clock">
+        <!-- TODO days -->
+        <div class="days">
+          <!-- days first -->
+          <div class="flip days-first">          
+            <input type="hidden" />
+            <div class="flip-display">
+              <div class="flip-display-top">5</div>
+              <div class="flip-display-bottom">5</div>
+            </div>
+            <div class="flipper">
+              <div class="flipper-top">5</div>
+              <div class="flipper-bottom">5</div>
+            </div>
           </div>
-          <div class="flipper">
-            <div class="flipper-top">5</div>
-            <div class="flipper-bottom">5</div>
+          <!-- days last -->
+          <div class="flip days-last">          
+            <input type="hidden" />
+            <div class="flip-display">
+              <div class="flip-display-top">5</div>
+              <div class="flip-display-bottom">5</div>
+            </div>
+            <div class="flipper">
+              <div class="flipper-top">5</div>
+              <div class="flipper-bottom">5</div>
+            </div>
           </div>
-        </div>
-        <!-- Hours last -->
-        <div class="flip hours-last">          
-          <input type="hidden" />
-          <div class="flip-display">
-            <div class="flip-display-top">5</div>
-            <div class="flip-display-bottom">5</div>
+        </div> <!-- End div days -->
+        <!-- TODO hours -->
+        <div class="hours">
+          <!-- Hours first -->
+          <div class="flip hours-first">          
+            <input type="hidden" />
+            <div class="flip-display">
+              <div class="flip-display-top">5</div>
+              <div class="flip-display-bottom">5</div>
+            </div>
+            <div class="flipper">
+              <div class="flipper-top">5</div>
+              <div class="flipper-bottom">5</div>
+            </div>
           </div>
-          <div class="flipper">
-            <div class="flipper-top">5</div>
-            <div class="flipper-bottom">5</div>
+          <!-- Hours last -->
+          <div class="flip hours-last">          
+            <input type="hidden" />
+            <div class="flip-display">
+              <div class="flip-display-top">5</div>
+              <div class="flip-display-bottom">5</div>
+            </div>
+            <div class="flipper">
+              <div class="flipper-top">5</div>
+              <div class="flipper-bottom">5</div>
+            </div>
           </div>
-        </div>
-      </div>
-      <!-- TODO minutes -->
-      <div class="minutes">
-        <!-- Minutes first -->
-        <div class="flip minutes-first">          
-          <input type="hidden" />
-          <div class="flip-display">
-            <div class="flip-display-top">5</div>
-            <div class="flip-display-bottom">5</div>
+        </div> <!-- End div hours -->
+
+        <!-- TODO minutes -->
+        <div class="minutes">
+          <!-- Minutes first -->
+          <div class="flip minutes-first">          
+            <input type="hidden" />
+            <div class="flip-display">
+              <div class="flip-display-top">5</div>
+              <div class="flip-display-bottom">5</div>
+            </div>
+            <div class="flipper">
+              <div class="flipper-top">5</div>
+              <div class="flipper-bottom">5</div>
+            </div>
           </div>
-          <div class="flipper">
-            <div class="flipper-top">5</div>
-            <div class="flipper-bottom">5</div>
+          <!-- Minutes last -->
+          <div class="flip minutes-last">          
+            <input type="hidden" />
+            <div class="flip-display">
+              <div class="flip-display-top">5</div>
+              <div class="flip-display-bottom">5</div>
+            </div>
+            <div class="flipper">
+              <div class="flipper-top">5</div>
+              <div class="flipper-bottom">5</div>
+            </div>
           </div>
-        </div>
-        <!-- Minutes last -->
-        <div class="flip minutes-last">          
-          <input type="hidden" />
-          <div class="flip-display">
-            <div class="flip-display-top">5</div>
-            <div class="flip-display-bottom">5</div>
+        </div> <!-- End div minutes -->
+
+        <!-- TODO Seconds -->
+        <div class="seconds">
+          <!-- Seconds first -->
+          <div class="flip seconds-first">          
+            <input type="hidden" />
+            <div class="flip-display">
+              <div class="flip-display-top">5</div>
+              <div class="flip-display-bottom">5</div>
+            </div>
+            <div class="flipper">
+              <div class="flipper-top">5</div>
+              <div class="flipper-bottom">5</div>
+            </div>
           </div>
-          <div class="flipper">
-            <div class="flipper-top">5</div>
-            <div class="flipper-bottom">5</div>
+          <!-- Seconds last -->
+          <div class="flip seconds-last">          
+            <input type="hidden" />
+            <div class="flip-display">
+              <div class="flip-display-top">5</div>
+              <div class="flip-display-bottom">5</div>
+            </div>
+            <div class="flipper">
+              <div class="flipper-top">5</div>
+              <div class="flipper-bottom">5</div>
+            </div>
           </div>
-        </div>
-      </div>
-      <!-- TODO Seconds -->
-      <div class="seconds">
-        <!-- Seconds first -->
-        <div class="flip seconds-first">          
-          <input type="hidden" />
-          <div class="flip-display">
-            <div class="flip-display-top">5</div>
-            <div class="flip-display-bottom">5</div>
-          </div>
-          <div class="flipper">
-            <div class="flipper-top">5</div>
-            <div class="flipper-bottom">5</div>
-          </div>
-        </div>
-        <!-- Seconds last -->
-        <div class="flip seconds-last">          
-          <input type="hidden" />
-          <div class="flip-display">
-            <div class="flip-display-top">5</div>
-            <div class="flip-display-bottom">5</div>
-          </div>
-          <div class="flipper">
-            <div class="flipper-top">5</div>
-            <div class="flipper-bottom">5</div>
-          </div>
-        </div>
-      </div>
-    </div>
+        </div> <!-- End div seconds -->
+<div class="desc">Days</div>
+<div class="desc">Hours</div>
+<div class="desc">Minutes</div>
+<div class="desc">Seconds</div>
+      </div> <!-- End div flip-clock -->
+      
+      <footer class="footer">
+        <img src="images/icon-facebook.svg" alt="facebook"/>
+        <img src="images/icon-pinterest.svg" alt="pinterest"/>
+        <img src="images/icon-instagram.svg" alt="instagram"/>
+      </footer>
+    </div> <!-- End div container-->
     <script src="js/jquery.min.js"></script>
     <script src="js/script.js"></script>
 </body>

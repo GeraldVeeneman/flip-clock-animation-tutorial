@@ -1,11 +1,24 @@
-// TODO we need to create a function that returns the current time in Object that holds the first and last digits of Hours, Minutes and Seconds.
+// TODO we need to create a function that returns the remaining time info in Object that holds the first and last digits of Days, Hours, Minutes and Seconds.
 
 function generateTimeInfo() {
-  const dateObj = new Date();
-  const hrs = dateObj.getHours();
-  const min = dateObj.getMinutes();
-  const sec = dateObj.getSeconds();
+
+  // Calculate remaining time
+  const endDateObj = new Date("May 15 2022");  
+  const currentdateObj = new Date();
+  const remainingObj = new Date(endDateObj - currentdateObj);
+  
+  
+  // Calculate remaining days
+  const days = Math.floor(remainingObj / (1000 * 3600 * 24));
+  
+  const hrs = remainingObj.getHours();
+  const min = remainingObj.getMinutes();
+  const sec = remainingObj.getSeconds();
   return {
+    days: {
+      firstDigit: parseInt(days / 10),
+      lastDigit: parseInt(days % 10),
+    },
     hours: {
       firstDigit: parseInt(hrs / 10),
       lastDigit: parseInt(hrs % 10),
@@ -34,6 +47,8 @@ $(document).ready(function () {
     const minutesFirst = createHandles($(flipClock).find(".minutes-first"));
     const hoursLast = createHandles($(flipClock).find(".hours-last"));
     const hoursFirst = createHandles($(flipClock).find(".hours-first"));
+    const daysLast = createHandles($(flipClock).find(".days-last"));
+    const daysFirst = createHandles($(flipClock).find(".days-first"));
 
     const initialTime = generateTimeInfo();
     setInitialValues(secondsLast, initialTime.seconds.lastDigit);
@@ -42,6 +57,8 @@ $(document).ready(function () {
     setInitialValues(minutesFirst, initialTime.minutes.firstDigit);
     setInitialValues(hoursLast, initialTime.hours.lastDigit);
     setInitialValues(hoursFirst, initialTime.hours.firstDigit);
+     setInitialValues(daysLast, initialTime.days.lastDigit);
+     setInitialValues(daysFirst, initialTime.days.firstDigit);
     // TODO Here we need to run the setInterval function
    setInterval(() => {
       const time = generateTimeInfo();
@@ -52,6 +69,8 @@ $(document).ready(function () {
       flipDigit(minutesFirst, time.minutes.firstDigit);
       flipDigit(hoursLast, time.hours.lastDigit);
       flipDigit(hoursFirst, time.hours.firstDigit);
+      flipDigit(daysLast, time.days.lastDigit);
+      flipDigit(daysFirst, time.days.firstDigit);
     }, 1000);
 
   });
@@ -93,8 +112,6 @@ $(document).ready(function () {
     }
 
   }
-
-
 
   // TODO Create a function that performs the flip animation
   function flipDigit(flipHandles, digitValue) {
