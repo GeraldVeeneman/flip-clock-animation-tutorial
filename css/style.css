@@ -29,8 +29,10 @@ html {
 
 /* Lets define some CSS vars */
 :root {
+  --unit-height: 7rem;
+  --unit-width: 7rem;
   --flip-height: 7rem;
-  --flip-width: 3.5rem;
+  --flip-width: calc(var(--flip-height) * 0.5);
   --line-height: calc(var(--flip-height) * 0.5);
   --flip-container-color: var(--dark-desaturated-blue);
   --flip-color: var(--dark-desaturated-blue);
@@ -83,6 +85,36 @@ body {
 .container .flip-clock .minutes,
 .container .flip-clock .seconds {
   display: inline-flex;
+  box-shadow: 2px 7px 0 hsl(240deg, 15%, 12%);
+}
+.container .flip-clock .days-first .flip-display-bottom::before,
+.container .flip-clock .hours-first .flip-display-bottom::before,
+.container .flip-clock .minutes-first .flip-display-bottom::before,
+.container .flip-clock .seconds-first .flip-display-bottom::before,
+.container .flip-clock .days-last .flip-display-bottom::after,
+.container .flip-clock .hours-last .flip-display-bottom::after,
+.container .flip-clock .minutes-last .flip-display-bottom::after,
+.container .flip-clock .seconds-last .flip-display-bottom::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  top: -5px;
+  position: absolute;
+  border-radius: 50%;
+  background: #191a24;
+  z-index: 1000;
+}
+.container .flip-clock .days-first .flip-display-bottom::before,
+.container .flip-clock .hours-first .flip-display-bottom::before,
+.container .flip-clock .minutes-first .flip-display-bottom::before,
+.container .flip-clock .seconds-first .flip-display-bottom::before {
+  left: -5px;
+}
+.container .flip-clock .days-last .flip-display-bottom::after,
+.container .flip-clock .hours-last .flip-display-bottom::after,
+.container .flip-clock .minutes-last .flip-display-bottom::after,
+.container .flip-clock .seconds-last .flip-display-bottom::after {
+  right: -5px;
 }
 .container .flip-clock .desc {
   justify-self: center;
@@ -121,6 +153,7 @@ body {
   --i: 2;
   border-top-left-radius: var(--flip-border-radius);
   border-top-right-radius: var(--flip-border-radius);
+  background-color: #2a2b3c;
 }
 .container .flip-clock .flip-display-bottom {
   --i: 0;
@@ -158,6 +191,8 @@ body {
   transform: rotateX(-90deg);
   border-top-left-radius: var(--flip-border-radius);
   border-top-right-radius: var(--flip-border-radius);
+  background-color: hsl(237deg, 18%, 20%);
+  box-shadow: 0 -5px 2px var(--very-dark-mostly-black-blue);
 }
 .container .flip-clock .flip .flipper-bottom {
   --i: 0;
@@ -179,6 +214,15 @@ body {
   justify-content: center;
   align-items: flex-end;
   gap: 3.5rem;
+}
+.container .footer svg {
+  width: 24px;
+  height: 24px;
+  fill: hsl(237deg, 18%, 59%);
+}
+.container .footer svg:hover {
+  fill: var(--soft-red);
+  cursor: pointer;
 }
 
 @keyframes flipperTopAnimation {

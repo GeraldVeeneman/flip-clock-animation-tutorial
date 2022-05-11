@@ -14,7 +14,7 @@
 /* Typography */
 
 /* Fonts */
-$font-primary:'Red Hat Text', sans-serif;
+$font-primary: 'Red Hat Text', sans-serif;
 
 /* Global reset */
 * {
@@ -35,8 +35,10 @@ html {
 
 /* Lets define some CSS vars */
 :root {
+    --unit-height: 7rem;
+    --unit-width: 7rem;
     --flip-height: 7rem;
-    --flip-width: 3.5rem;
+    --flip-width: calc(var(--flip-height) * 0.5);
     --line-height: calc(var(--flip-height) * 0.5);
     --flip-container-color: var(--dark-desaturated-blue);
     --flip-color: var(--dark-desaturated-blue);
@@ -69,7 +71,9 @@ body {
         size: 1200px, cover;
 
         //TODO media query background
-    };
+    }
+
+    ;
 }
 
 .container {
@@ -77,176 +81,231 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    
+
     .header {
-    color: var(--white);
+        color: var(--white);
 
-    font: {
-        size: 1.8rem;
-    }
-
-    text: {
-        align: center;
-        transform: uppercase;
-    }
-
-    letter-spacing: 0.5rem;
-    margin-bottom: 6rem;
-
-}
-
-.flip-clock {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    justify-content: space-between;
-    gap: 1.5rem;
-
-    .days,
-    .hours,
-    .minutes,
-    .seconds {
-        display: inline-flex;
-    }
-
-    .desc {
-        justify-self: center;
-        color: var(--grayish-blue);
         font: {
-            size: .7rem;
-            weight: 400;
+            size: 1.8rem;
         }
-        text-transform: uppercase;
-        letter-spacing: .3rem;
+
+        text: {
+            align: center;
+            transform: uppercase;
+        }
+
+        letter-spacing: 0.5rem;
+        margin-bottom: 6rem;
+
     }
 
+    .flip-clock {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: space-between;
+        gap: 1.5rem;
 
-    .flip {
-        height: var(--flip-height);
-        width: var(--flip-width);
-        border-radius: var(--flip-border-radius);
+        .days,
+        .hours,
+        .minutes,
+        .seconds {
+            //width: var(--unit-width);
+            //height: var(--unit-height);
+            display: inline-flex;
+            box-shadow: 2px 7px 0 hsl(240, 15%, 12%);
+        }
+
+        // Card points
+        .days-first .flip-display-bottom::before,
+        .hours-first .flip-display-bottom::before,
+        .minutes-first .flip-display-bottom::before,
+        .seconds-first .flip-display-bottom::before,
         
-        font: {
-            size: calc(var(--flip-height) * 0.5); // Half size of the flip height
-            weight: 700;
-        }
-
-        position: relative;
-
-
-        &-display {
-            height: var(--flip-height);
-            width: var(--flip-width);
-            display: flex;
-            flex-direction: column;
-            z-index: 1;
-
-
-            &-top,
-            &-bottom {
-                position: relative;
-                text-align: center;
-                overflow: hidden;
-                width: 100%;
-                height: calc(var(--flip-height) * 0.5); // Half size of the flip height
-                background-color: var(--flip-container-color);
-                color: var(--flip-text-color);
-                line-height: calc(var(--line-height) * var(--i)); // Property i will be defined later
-
-
-
-            }
-
-            &-top {
-                // Based on the i property we'll align the line-height
-                --i: 2;
-                border-top-left-radius: var(--flip-border-radius);
-                border-top-right-radius: var(--flip-border-radius);
-
-            }
-
-            &-bottom {
-                --i: 0;
-                border-bottom-left-radius: var(--flip-border-radius);
-                border-bottom-right-radius: var(--flip-border-radius);
-            }
-        }
-
-        & .flipper {
-            // This is positioned on top of the flip display so that they are stacked upon each other
+        .days-last .flip-display-bottom::after,
+        .hours-last .flip-display-bottom::after,
+        .minutes-last .flip-display-bottom::after,
+        .seconds-last .flip-display-bottom::after
+        {
+            content: "";
+            width: 10px;
+            height: 10px;
+            top: -5px;
             position: absolute;
-            top: 0;
-            bottom: 0;
-            //background-color: rgba(255, 0, 0, 0.75);
-            left: 0;
-            right: 0;
-            margin: auto;
-            height: var(--flip-height);
-            width: var(--flip-width);
-            perspective: var(--perspective);
-
-            &-top,
-            &-bottom {
-                position: absolute;
-                left: -10%; // negative percentage for better alignment
-                right: -10%;
-                height: calc(var(--flip-height) *.5);
-                width: var(--flip-width);
-                margin: auto;
-                text-align: center;
-                line-height: calc(var(--line-height) * var(--i));
-                overflow: hidden;
-                background-color: var(--flip-color);
-                color: var(--flip-text-color);
-
-            }
-
-            // Now we need to align the flipper line height to match with the file display line heights
-            &-top {
-                --i: 2;
-                //background-color: pink;
-                top: 0;
-                transform-origin: bottom;
-                transform: rotateX(-90deg);
-                // We'll animate the top part from 0deg to -90deg
-                border-top-left-radius: var(--flip-border-radius);
-                border-top-right-radius: var(--flip-border-radius);
-            }
-
-            &-bottom {
-                --i: 0;
-                //background-color: yellow;
-                // Flipper bottom part is visible so we need to rotate it to 90deg via X
-                transform: rotateX(90deg);
-                // Now transform the origin to top
-                transform-origin: top;
-                bottom: 0;
-                // During animation we'll need to rotate from 90deg to 0deg
-                border-bottom-left-radius: var(--flip-border-radius);
-                border-bottom-right-radius: var(--flip-border-radius);
-            }
-
+            border-radius: 50%;
+            background: #191a24;
+            z-index: 1000;
         }
 
-        // By adding a play class we'll animate the flipper
-        &.play {
+        .days-first .flip-display-bottom::before,
+        .hours-first .flip-display-bottom::before,
+        .minutes-first .flip-display-bottom::before,
+        .seconds-first .flip-display-bottom::before {
+            left: -5px;
+        }
 
-            & .flipper-top {
-                animation: flipperTopAnimation var(--animation-time) var(--animation-ease);
+        .days-last .flip-display-bottom::after,
+        .hours-last .flip-display-bottom::after,
+        .minutes-last .flip-display-bottom::after,
+        .seconds-last .flip-display-bottom::after {
+            right: -5px;
+        }
+
+        .desc {
+            justify-self: center;
+            color: var(--grayish-blue);
+
+            font: {
+                size: .7rem;
+                weight: 400;
             }
 
-            & .flipper-bottom {
-                animation: flipperBottomAnimation var(--animation-time) var(--animation-ease);
+            text-transform: uppercase;
+            letter-spacing: .3rem;
+        }
+
+
+        .flip {
+            height: var(--flip-height);
+            width: var(--flip-width);
+            border-radius: var(--flip-border-radius);
+
+            font: {
+                size: calc(var(--flip-height) * 0.5); // Half size of the flip height
+                weight: 700;
             }
 
+            position: relative;
+
+
+            &-display {
+                height: var(--flip-height);
+                width: var(--flip-width);
+                display: flex;
+                flex-direction: column;
+                z-index: 1;
+
+
+                &-top,
+                &-bottom {
+                    position: relative;
+                    text-align: center;
+                    overflow: hidden;
+                    width: 100%;
+                    height: calc(var(--flip-height) * 0.5); // Half size of the flip height
+                    background-color: var(--flip-container-color);
+                    color: var(--flip-text-color);
+                    line-height: calc(var(--line-height) * var(--i)); // Property i will be defined later
+                }
+
+                &-top {
+                    // Based on the i property we'll align the line-height
+                    --i: 2;
+                    border-top-left-radius: var(--flip-border-radius);
+                    border-top-right-radius: var(--flip-border-radius);
+                    
+                    //border-bottom: 1px solid #191a24;
+                    background-color: #2a2b3c;
+
+                }
+
+                &-bottom {
+                    --i: 0;
+                    border-bottom-left-radius: var(--flip-border-radius);
+                    border-bottom-right-radius: var(--flip-border-radius);
+                }
+            }
+
+            & .flipper {
+                // This is positioned on top of the flip display so that they are stacked upon each other
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                //background-color: rgba(255, 0, 0, 0.75);
+                left: 0;
+                right: 0;
+                margin: auto;
+                height: var(--flip-height);
+                width: var(--flip-width);
+                perspective: var(--perspective);
+
+                &-top,
+                &-bottom {
+                    position: absolute;
+                    left: -10%; // negative percentage for better alignment
+                    right: -10%;
+                    height: calc(var(--flip-height) *.5);
+                    width: var(--flip-width);
+                    margin: auto;
+                    text-align: center;
+                    line-height: calc(var(--line-height) * var(--i));
+                    overflow: hidden;
+                    background-color: var(--flip-color);
+                    color: var(--flip-text-color);
+
+                }
+
+                // Now we need to align the flipper line height to match with the file display line heights
+                &-top {
+                    --i: 2;
+                    //background-color: pink;
+                    top: 0;
+                    transform-origin: bottom;
+                    transform: rotateX(-90deg);
+                    // We'll animate the top part from 0deg to -90deg
+                    border-top-left-radius: var(--flip-border-radius);
+                    border-top-right-radius: var(--flip-border-radius);
+
+                    //border-bottom: 1px solid #191a24;
+                        background-color: hsl(237, 18%, 20%);
+                        box-shadow: 0 -5px 2px var(--very-dark-mostly-black-blue);
+                }
+
+                &-bottom {
+                    --i: 0;
+                    //background-color: yellow;
+                    // Flipper bottom part is visible so we need to rotate it to 90deg via X
+                    transform: rotateX(90deg);
+                    // Now transform the origin to top
+                    transform-origin: top;
+                    bottom: 0;
+                    // During animation we'll need to rotate from 90deg to 0deg
+                    border-bottom-left-radius: var(--flip-border-radius);
+                    border-bottom-right-radius: var(--flip-border-radius);
+                }
+
+            }
+
+            // By adding a play class we'll animate the flipper
+            &.play {
+
+                & .flipper-top {
+                    animation: flipperTopAnimation var(--animation-time) var(--animation-ease);
+                }
+
+                & .flipper-bottom {
+                    animation: flipperBottomAnimation var(--animation-time) var(--animation-ease);
+                }
+
+            }
         }
     }
-}
+
     .footer {
         display: flex;
         flex-grow: 1;
         justify-content: center;
         align-items: flex-end;
         gap: 3.5rem;
+
+        svg {
+            width: 24px;
+            height: 24px;
+            fill:hsl(237, 18%, 59%);
+        }
+        svg:hover {
+            fill: var(--soft-red);
+            cursor: pointer;
+        }
     }
 
 }
@@ -257,15 +316,20 @@ body {
     0% {
         transform: rotateX(0deg);
     }
-    50%, 100% {
+
+    50%,
+    100% {
         transform: rotateX(-90deg);
     }
 }
 
 @keyframes flipperBottomAnimation {
-    0%, 50% {
+
+    0%,
+    50% {
         transform: rotateX(90deg);
     }
+
     100% {
         transform: rotateX(0deg);
     }

@@ -30,7 +30,7 @@ function generateTimeInfo() {
     seconds: {
       firstDigit: parseInt(sec / 10),
       lastDigit: parseInt(sec % 10),
-    },
+    }
   };
 }
 
@@ -57,8 +57,8 @@ $(document).ready(function () {
     setInitialValues(minutesFirst, initialTime.minutes.firstDigit);
     setInitialValues(hoursLast, initialTime.hours.lastDigit);
     setInitialValues(hoursFirst, initialTime.hours.firstDigit);
-     setInitialValues(daysLast, initialTime.days.lastDigit);
-     setInitialValues(daysFirst, initialTime.days.firstDigit);
+    setInitialValues(daysLast, initialTime.days.lastDigit);
+    setInitialValues(daysFirst, initialTime.days.firstDigit);
     // TODO Here we need to run the setInterval function
    setInterval(() => {
       const time = generateTimeInfo();
