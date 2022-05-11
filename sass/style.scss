@@ -35,10 +35,10 @@ html {
 
 /* Lets define some CSS vars */
 :root {
-    --unit-height: 7rem;
-    --unit-width: 7rem;
-    --flip-height: var(--unit-height);
-    --flip-width: var(--unit-width);
+    --card-height: 7rem;
+    --card-width: 7rem;
+    --flip-height: var(--card-height);
+    --flip-width: var(--card-width);
     --line-height: calc(var(--flip-height) * 0.5);
     --flip-container-color: var(--dark-desaturated-blue);
     --flip-color: var(--dark-desaturated-blue);
@@ -109,8 +109,8 @@ body {
         .hours-card,
         .minutes-card,
         .seconds-card {
-            width: var(--unit-width);
-            height: var(--unit-height);
+            width: var(--card-width);
+            height: var(--card-height);
             display: inline-flex;
             box-shadow: 2px 7px 0 hsl(240, 15%, 12%);
         }
