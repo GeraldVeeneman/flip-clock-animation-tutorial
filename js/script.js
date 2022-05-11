@@ -14,23 +14,16 @@ function generateTimeInfo() {
   const hrs = remainingObj.getHours();
   const min = remainingObj.getMinutes();
   const sec = remainingObj.getSeconds();
+
+  const daysDigits = ("0" + days).slice(-2);
+  const hoursDigits = ("0" + hrs).slice(-2);
+  const minutesDigits = ("0" + min).slice(-2);
+  const secondsDigits = ("0" + sec).slice(-2);
   return {
-    days: {
-      firstDigit: parseInt(days / 10),
-      lastDigit: parseInt(days % 10),
-    },
-    hours: {
-      firstDigit: parseInt(hrs / 10),
-      lastDigit: parseInt(hrs % 10),
-    },
-    minutes: {
-      firstDigit: parseInt(min / 10),
-      lastDigit: parseInt(min % 10),
-    },
-    seconds: {
-      firstDigit: parseInt(sec / 10),
-      lastDigit: parseInt(sec % 10),
-    }
+    daysDigits,
+    hoursDigits,
+    minutesDigits,
+    secondsDigits
   };
 }
 
@@ -41,36 +34,24 @@ $(document).ready(function () {
   $(".flip-clock").each(function (_, flipClock) {
 
     // Let's create the handles for the last and first digits of the seconds, minutes and hours
-    const secondsLast = createHandles($(flipClock).find(".seconds-last"));
-    const secondsFirst = createHandles($(flipClock).find(".seconds-first"));
-    const minutesLast = createHandles($(flipClock).find(".minutes-last"));
-    const minutesFirst = createHandles($(flipClock).find(".minutes-first"));
-    const hoursLast = createHandles($(flipClock).find(".hours-last"));
-    const hoursFirst = createHandles($(flipClock).find(".hours-first"));
-    const daysLast = createHandles($(flipClock).find(".days-last"));
-    const daysFirst = createHandles($(flipClock).find(".days-first"));
+    const seconds = createHandles($(flipClock).find(".flip.seconds"));
+    const minutes = createHandles($(flipClock).find(".flip.minutes"));
+    const hours = createHandles($(flipClock).find(".flip.hours"));
+    const days = createHandles($(flipClock).find(".flip.days"));
 
     const initialTime = generateTimeInfo();
-    setInitialValues(secondsLast, initialTime.seconds.lastDigit);
-    setInitialValues(secondsFirst, initialTime.seconds.firstDigit);
-    setInitialValues(minutesLast, initialTime.minutes.lastDigit);
-    setInitialValues(minutesFirst, initialTime.minutes.firstDigit);
-    setInitialValues(hoursLast, initialTime.hours.lastDigit);
-    setInitialValues(hoursFirst, initialTime.hours.firstDigit);
-    setInitialValues(daysLast, initialTime.days.lastDigit);
-    setInitialValues(daysFirst, initialTime.days.firstDigit);
+    setInitialValues(seconds, initialTime.secondsDigits);
+    setInitialValues(minutes, initialTime.minutesDigits);
+    setInitialValues(hours, initialTime.hoursDigits);
+    setInitialValues(days, initialTime.daysDigits);
     // TODO Here we need to run the setInterval function
    setInterval(() => {
       const time = generateTimeInfo();
       // TODO -> Now we need to call the flipDigit function
-      flipDigit(secondsLast, time.seconds.lastDigit);
-      flipDigit(secondsFirst, time.seconds.firstDigit);
-      flipDigit(minutesLast, time.minutes.lastDigit);
-      flipDigit(minutesFirst, time.minutes.firstDigit);
-      flipDigit(hoursLast, time.hours.lastDigit);
-      flipDigit(hoursFirst, time.hours.firstDigit);
-      flipDigit(daysLast, time.days.lastDigit);
-      flipDigit(daysFirst, time.days.firstDigit);
+      flipDigit(seconds, time.secondsDigits);
+      flipDigit(minutes, time.minutesDigits);
+      flipDigit(hours, time.hoursDigits);
+      flipDigit(days, time.daysDigits);
     }, 1000);
 
   });
@@ -135,7 +116,7 @@ $(document).ready(function () {
     };
 
     // We only want the file animation take place when there is a change in the input hidden field
-    if (parseInt(flipHiddenInput.val()) !== digitValue) {
+    if (flipHiddenInput.val() !== digitValue) {
       setPreviousValue(flipHiddenInput.val());
       // Set the new value to the input field and trigger a custom event
       flipHiddenInput.val(digitValue).trigger("valueChanged");

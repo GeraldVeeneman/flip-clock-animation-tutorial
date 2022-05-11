@@ -31,8 +31,8 @@ html {
 :root {
   --unit-height: 7rem;
   --unit-width: 7rem;
-  --flip-height: 7rem;
-  --flip-width: calc(var(--flip-height) * 0.5);
+  --flip-height: var(--unit-height);
+  --flip-width: var(--unit-width);
   --line-height: calc(var(--flip-height) * 0.5);
   --flip-container-color: var(--dark-desaturated-blue);
   --flip-color: var(--dark-desaturated-blue);
@@ -80,21 +80,23 @@ body {
   justify-content: space-between;
   gap: 1.5rem;
 }
-.container .flip-clock .days,
-.container .flip-clock .hours,
-.container .flip-clock .minutes,
-.container .flip-clock .seconds {
+.container .flip-clock .days-card,
+.container .flip-clock .hours-card,
+.container .flip-clock .minutes-card,
+.container .flip-clock .seconds-card {
+  width: var(--unit-width);
+  height: var(--unit-height);
   display: inline-flex;
   box-shadow: 2px 7px 0 hsl(240deg, 15%, 12%);
 }
-.container .flip-clock .days-first .flip-display-bottom::before,
-.container .flip-clock .hours-first .flip-display-bottom::before,
-.container .flip-clock .minutes-first .flip-display-bottom::before,
-.container .flip-clock .seconds-first .flip-display-bottom::before,
-.container .flip-clock .days-last .flip-display-bottom::after,
-.container .flip-clock .hours-last .flip-display-bottom::after,
-.container .flip-clock .minutes-last .flip-display-bottom::after,
-.container .flip-clock .seconds-last .flip-display-bottom::after {
+.container .flip-clock .days .flip-display-bottom::before,
+.container .flip-clock .hours .flip-display-bottom::before,
+.container .flip-clock .minutes .flip-display-bottom::before,
+.container .flip-clock .seconds .flip-display-bottom::before,
+.container .flip-clock .days .flip-display-bottom::after,
+.container .flip-clock .hours .flip-display-bottom::after,
+.container .flip-clock .minutes .flip-display-bottom::after,
+.container .flip-clock .seconds .flip-display-bottom::after {
   content: "";
   width: 10px;
   height: 10px;
@@ -104,16 +106,16 @@ body {
   background: #191a24;
   z-index: 1000;
 }
-.container .flip-clock .days-first .flip-display-bottom::before,
-.container .flip-clock .hours-first .flip-display-bottom::before,
-.container .flip-clock .minutes-first .flip-display-bottom::before,
-.container .flip-clock .seconds-first .flip-display-bottom::before {
+.container .flip-clock .days .flip-display-bottom::before,
+.container .flip-clock .hours .flip-display-bottom::before,
+.container .flip-clock .minutes .flip-display-bottom::before,
+.container .flip-clock .seconds .flip-display-bottom::before {
   left: -5px;
 }
-.container .flip-clock .days-last .flip-display-bottom::after,
-.container .flip-clock .hours-last .flip-display-bottom::after,
-.container .flip-clock .minutes-last .flip-display-bottom::after,
-.container .flip-clock .seconds-last .flip-display-bottom::after {
+.container .flip-clock .days .flip-display-bottom::after,
+.container .flip-clock .hours .flip-display-bottom::after,
+.container .flip-clock .minutes .flip-display-bottom::after,
+.container .flip-clock .seconds .flip-display-bottom::after {
   right: -5px;
 }
 .container .flip-clock .desc {
@@ -153,7 +155,7 @@ body {
   --i: 2;
   border-top-left-radius: var(--flip-border-radius);
   border-top-right-radius: var(--flip-border-radius);
-  background-color: #2a2b3c;
+  background-color: hsl(237deg, 18%, 20%);
 }
 .container .flip-clock .flip-display-bottom {
   --i: 0;

@@ -37,8 +37,8 @@ html {
 :root {
     --unit-height: 7rem;
     --unit-width: 7rem;
-    --flip-height: 7rem;
-    --flip-width: calc(var(--flip-height) * 0.5);
+    --flip-height: var(--unit-height);
+    --flip-width: var(--unit-width);
     --line-height: calc(var(--flip-height) * 0.5);
     --flip-container-color: var(--dark-desaturated-blue);
     --flip-color: var(--dark-desaturated-blue);
@@ -105,26 +105,26 @@ body {
         justify-content: space-between;
         gap: 1.5rem;
 
-        .days,
-        .hours,
-        .minutes,
-        .seconds {
-            //width: var(--unit-width);
-            //height: var(--unit-height);
+        .days-card,
+        .hours-card,
+        .minutes-card,
+        .seconds-card {
+            width: var(--unit-width);
+            height: var(--unit-height);
             display: inline-flex;
             box-shadow: 2px 7px 0 hsl(240, 15%, 12%);
         }
 
         // Card points
-        .days-first .flip-display-bottom::before,
-        .hours-first .flip-display-bottom::before,
-        .minutes-first .flip-display-bottom::before,
-        .seconds-first .flip-display-bottom::before,
+        .days .flip-display-bottom::before,
+        .hours .flip-display-bottom::before,
+        .minutes .flip-display-bottom::before,
+        .seconds .flip-display-bottom::before,
         
-        .days-last .flip-display-bottom::after,
-        .hours-last .flip-display-bottom::after,
-        .minutes-last .flip-display-bottom::after,
-        .seconds-last .flip-display-bottom::after
+        .days .flip-display-bottom::after,
+        .hours .flip-display-bottom::after,
+        .minutes .flip-display-bottom::after,
+        .seconds .flip-display-bottom::after
         {
             content: "";
             width: 10px;
@@ -136,17 +136,17 @@ body {
             z-index: 1000;
         }
 
-        .days-first .flip-display-bottom::before,
-        .hours-first .flip-display-bottom::before,
-        .minutes-first .flip-display-bottom::before,
-        .seconds-first .flip-display-bottom::before {
+        .days .flip-display-bottom::before,
+        .hours .flip-display-bottom::before,
+        .minutes .flip-display-bottom::before,
+        .seconds .flip-display-bottom::before {
             left: -5px;
         }
 
-        .days-last .flip-display-bottom::after,
-        .hours-last .flip-display-bottom::after,
-        .minutes-last .flip-display-bottom::after,
-        .seconds-last .flip-display-bottom::after {
+        .days .flip-display-bottom::after,
+        .hours .flip-display-bottom::after,
+        .minutes .flip-display-bottom::after,
+        .seconds .flip-display-bottom::after {
             right: -5px;
         }
 
@@ -204,7 +204,7 @@ body {
                     border-top-right-radius: var(--flip-border-radius);
                     
                     //border-bottom: 1px solid #191a24;
-                    background-color: #2a2b3c;
+                    background-color: hsl(237, 18%, 20%);
 
                 }
 
