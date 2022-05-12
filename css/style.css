@@ -1,5 +1,27 @@
 /* Colours */
 :root {
+  --card-height: 7rem;
+  --card-width: 7rem;
+  --flip-height: var(--card-height);
+  --flip-width: var(--card-width);
+  --line-height: calc(var(--flip-height) * 0.5);
+  --flip-container-color: var(--dark-desaturated-blue);
+  --flip-color: var(--dark-desaturated-blue);
+  --flip-text-color: var(--soft-red);
+  --flip-border-radius: calc(var(--flip-height) * 0.05);
+  --flip-display-bottom-point-width: 10px;
+  --flip-display-bottom-point-height: 10px;
+  --animation-time: 0.8s;
+  --animation-ease: linear;
+  --perspective: 20rem;
+  --card-height-xl: 14.7rem;
+  --card-width-xl: 14.7rem;
+  --flip-height-xl: var(--card-height-xl);
+  --flip-width-xl: var(--card-width-xl);
+  --line-height-xl: calc(var(--flip-height-xl) * 0.5);
+  --flip-border-radius-xl: calc(var(--flip-height-xl) * 0.05);
+  --flip-display-bottom-point-width-xl: 20px;
+  --flip-display-bottom-point-height-xl: 20px;
   --grayish-blue: hsl(237, 18%, 59%);
   --soft-red: hsl(345, 95%, 68%);
   --white: hsl(0, 0%, 100%);
@@ -10,6 +32,7 @@
 
 /* Typography */
 /* Fonts */
+/* Media Query break points */
 /* Global reset */
 * {
   margin: 0;
@@ -25,22 +48,6 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
-}
-
-/* Lets define some CSS vars */
-:root {
-  --unit-height: 7rem;
-  --unit-width: 7rem;
-  --flip-height: var(--unit-height);
-  --flip-width: var(--unit-width);
-  --line-height: calc(var(--flip-height) * 0.5);
-  --flip-container-color: var(--dark-desaturated-blue);
-  --flip-color: var(--dark-desaturated-blue);
-  --flip-text-color: var(--soft-red);
-  --flip-border-radius: calc(var(--flip-height) * 0.05);
-  --animation-time: 0.8s;
-  --animation-ease: linear;
-  --perspective: 20rem;
 }
 
 body {
@@ -59,6 +66,12 @@ body {
   background-position: 82% 100%, center center;
   background-size: 1200px, cover;
 }
+@media only screen and (min-width: 1200px) {
+  body {
+    background-position: bottom center, top center;
+    background-size: contain, contain;
+  }
+}
 
 .container {
   padding: 14rem 2.5rem 5rem;
@@ -74,20 +87,41 @@ body {
   letter-spacing: 0.5rem;
   margin-bottom: 6rem;
 }
+@media only screen and (min-width: 1200px) {
+  .container .header {
+    font-size: 2.2rem;
+    letter-spacing: 0.75rem;
+    margin-bottom: 10rem;
+  }
+}
 .container .flip-clock {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
   gap: 1.5rem;
 }
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock {
+    gap: 3.4rem;
+  }
+}
 .container .flip-clock .days-card,
 .container .flip-clock .hours-card,
 .container .flip-clock .minutes-card,
 .container .flip-clock .seconds-card {
-  width: var(--unit-width);
-  height: var(--unit-height);
+  width: var(--card-width);
+  height: var(--card-height);
   display: inline-flex;
   box-shadow: 2px 7px 0 hsl(240deg, 15%, 12%);
+}
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .days-card,
+.container .flip-clock .hours-card,
+.container .flip-clock .minutes-card,
+.container .flip-clock .seconds-card {
+    width: var(--card-width-xl);
+    height: var(--card-height-xl);
+  }
 }
 .container .flip-clock .days .flip-display-bottom::before,
 .container .flip-clock .hours .flip-display-bottom::before,
@@ -98,25 +132,55 @@ body {
 .container .flip-clock .minutes .flip-display-bottom::after,
 .container .flip-clock .seconds .flip-display-bottom::after {
   content: "";
-  width: 10px;
-  height: 10px;
-  top: -5px;
+  width: var(--flip-display-bottom-point-width);
+  height: var(--flip-display-bottom-point-height);
+  top: calc(var(--flip-display-bottom-point-height) * -0.5);
   position: absolute;
   border-radius: 50%;
   background: #191a24;
   z-index: 1000;
 }
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .days .flip-display-bottom::before,
+.container .flip-clock .hours .flip-display-bottom::before,
+.container .flip-clock .minutes .flip-display-bottom::before,
+.container .flip-clock .seconds .flip-display-bottom::before,
+.container .flip-clock .days .flip-display-bottom::after,
+.container .flip-clock .hours .flip-display-bottom::after,
+.container .flip-clock .minutes .flip-display-bottom::after,
+.container .flip-clock .seconds .flip-display-bottom::after {
+    width: var(--flip-display-bottom-point-width-xl);
+    height: var(--flip-display-bottom-point-height-xl);
+    top: calc(var(--flip-display-bottom-point-height-xl) * -0.5);
+  }
+}
 .container .flip-clock .days .flip-display-bottom::before,
 .container .flip-clock .hours .flip-display-bottom::before,
 .container .flip-clock .minutes .flip-display-bottom::before,
 .container .flip-clock .seconds .flip-display-bottom::before {
-  left: -5px;
+  left: calc(var(--flip-display-bottom-point-width) * -0.5);
+}
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .days .flip-display-bottom::before,
+.container .flip-clock .hours .flip-display-bottom::before,
+.container .flip-clock .minutes .flip-display-bottom::before,
+.container .flip-clock .seconds .flip-display-bottom::before {
+    left: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
+  }
 }
 .container .flip-clock .days .flip-display-bottom::after,
 .container .flip-clock .hours .flip-display-bottom::after,
 .container .flip-clock .minutes .flip-display-bottom::after,
 .container .flip-clock .seconds .flip-display-bottom::after {
-  right: -5px;
+  right: calc(var(--flip-display-bottom-point-width) * -0.5);
+}
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .days .flip-display-bottom::after,
+.container .flip-clock .hours .flip-display-bottom::after,
+.container .flip-clock .minutes .flip-display-bottom::after,
+.container .flip-clock .seconds .flip-display-bottom::after {
+    right: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
+  }
 }
 .container .flip-clock .desc {
   justify-self: center;
@@ -126,6 +190,12 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.3rem;
 }
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .desc {
+    font-size: 1.4rem;
+    letter-spacing: 0.6rem;
+  }
+}
 .container .flip-clock .flip {
   height: var(--flip-height);
   width: var(--flip-width);
@@ -134,12 +204,26 @@ body {
   font-weight: 700;
   position: relative;
 }
+@media screen and (min-width: 1200px) {
+  .container .flip-clock .flip {
+    height: var(--flip-height-xl);
+    width: var(--flip-width-xl);
+    border-radius: var(--flip-border-radius-xl);
+    font-size: calc(var(--flip-height-xl) * 0.5);
+  }
+}
 .container .flip-clock .flip-display {
   height: var(--flip-height);
   width: var(--flip-width);
   display: flex;
   flex-direction: column;
   z-index: 1;
+}
+@media screen and (min-width: 1200px) {
+  .container .flip-clock .flip-display {
+    height: var(--flip-height-xl);
+    width: var(--flip-width-xl);
+  }
 }
 .container .flip-clock .flip-display-top, .container .flip-clock .flip-display-bottom {
   position: relative;
@@ -151,16 +235,34 @@ body {
   color: var(--flip-text-color);
   line-height: calc(var(--line-height) * var(--i));
 }
+@media screen and (min-width: 1200px) {
+  .container .flip-clock .flip-display-top, .container .flip-clock .flip-display-bottom {
+    height: calc(var(--flip-height-xl) * 0.5);
+    line-height: calc(var(--line-height-xl) * var(--i));
+  }
+}
 .container .flip-clock .flip-display-top {
   --i: 2;
   border-top-left-radius: var(--flip-border-radius);
   border-top-right-radius: var(--flip-border-radius);
   background-color: hsl(237deg, 18%, 20%);
 }
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .flip-display-top {
+    border-top-left-radius: var(--flip-border-radius-xl);
+    border-top-right-radius: var(--flip-border-radius-xl);
+  }
+}
 .container .flip-clock .flip-display-bottom {
   --i: 0;
   border-bottom-left-radius: var(--flip-border-radius);
   border-bottom-right-radius: var(--flip-border-radius);
+}
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .flip-display-bottom {
+    border-bottom-left-radius: var(--flip-border-radius-xl);
+    border-bottom-right-radius: var(--flip-border-radius-xl);
+  }
 }
 .container .flip-clock .flip .flipper {
   position: absolute;
@@ -172,6 +274,12 @@ body {
   height: var(--flip-height);
   width: var(--flip-width);
   perspective: var(--perspective);
+}
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .flip .flipper {
+    height: var(--flip-height-xl);
+    width: var(--flip-width-xl);
+  }
 }
 .container .flip-clock .flip .flipper-top, .container .flip-clock .flip .flipper-bottom {
   position: absolute;
@@ -186,6 +294,13 @@ body {
   background-color: var(--flip-color);
   color: var(--flip-text-color);
 }
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .flip .flipper-top, .container .flip-clock .flip .flipper-bottom {
+    height: calc(var(--flip-height-xl) * 0.5);
+    width: var(--flip-width-xl);
+    line-height: calc(var(--line-height-xl) * var(--i));
+  }
+}
 .container .flip-clock .flip .flipper-top {
   --i: 2;
   top: 0;
@@ -196,6 +311,12 @@ body {
   background-color: hsl(237deg, 18%, 20%);
   box-shadow: 0 -5px 2px var(--very-dark-mostly-black-blue);
 }
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .flip .flipper-top {
+    border-top-left-radius: var(--flip-border-radius-xl);
+    border-top-right-radius: var(--flip-border-radius-xl);
+  }
+}
 .container .flip-clock .flip .flipper-bottom {
   --i: 0;
   transform: rotateX(90deg);
@@ -203,6 +324,12 @@ body {
   bottom: 0;
   border-bottom-left-radius: var(--flip-border-radius);
   border-bottom-right-radius: var(--flip-border-radius);
+}
+@media only screen and (min-width: 1200px) {
+  .container .flip-clock .flip .flipper-bottom {
+    border-bottom-left-radius: var(--flip-border-radius-xl);
+    border-bottom-right-radius: var(--flip-border-radius-xl);
+  }
 }
 .container .flip-clock .flip.play .flipper-top {
   animation: flipperTopAnimation var(--animation-time) var(--animation-ease);

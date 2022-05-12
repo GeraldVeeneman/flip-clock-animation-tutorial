@@ -1,5 +1,33 @@
 /* Colours */
 :root {
+    --card-height: 7rem;
+    --card-width: 7rem;
+    --flip-height: var(--card-height);
+    --flip-width: var(--card-width);
+    --line-height: calc(var(--flip-height) * 0.5);
+    --flip-container-color: var(--dark-desaturated-blue);
+    --flip-color: var(--dark-desaturated-blue);
+    --flip-text-color: var(--soft-red);
+    --flip-border-radius: calc(var(--flip-height) * 0.05);
+    --flip-display-bottom-point-width: 10px;
+    --flip-display-bottom-point-height: 10px;
+    --animation-time: 0.8s;
+    --animation-ease: linear;
+    --perspective: 20rem;
+    
+    // Variables desktop layout (xl >= 1200px)
+    --card-height-xl: 14.7rem;
+    --card-width-xl: 14.7rem;
+    --flip-height-xl: var(--card-height-xl);
+    --flip-width-xl: var(--card-width-xl);
+    --line-height-xl: calc(var(--flip-height-xl) * 0.5);
+    --flip-border-radius-xl: calc(var(--flip-height-xl) * 0.05);
+    --flip-display-bottom-point-width-xl: 20px;
+    --flip-display-bottom-point-height-xl: 20px;
+    // TODO box-shadow
+    // TODO perspective
+
+    // Colours from Frontend Mentor challenge
     // Primary
     --grayish-blue: hsl(237, 18%, 59%);
     --soft-red: hsl(345, 95%, 68%);
@@ -16,6 +44,9 @@
 /* Fonts */
 $font-primary: 'Red Hat Text', sans-serif;
 
+/* Media Query break points */
+$bp-desktop: 1200px; // minimum pixels desktop view
+
 /* Global reset */
 * {
     margin: 0;
@@ -31,22 +62,6 @@ $font-primary: 'Red Hat Text', sans-serif;
 html {
     font-size: 62.5%; // 1rem = 10px (10px/16px = 62.5%)
     box-sizing: border-box;
-}
-
-/* Lets define some CSS vars */
-:root {
-    --card-height: 7rem;
-    --card-width: 7rem;
-    --flip-height: var(--card-height);
-    --flip-width: var(--card-width);
-    --line-height: calc(var(--flip-height) * 0.5);
-    --flip-container-color: var(--dark-desaturated-blue);
-    --flip-color: var(--dark-desaturated-blue);
-    --flip-text-color: var(--soft-red);
-    --flip-border-radius: calc(var(--flip-height) * 0.05);
-    --animation-time: 0.8s;
-    --animation-ease: linear;
-    --perspective: 20rem;
 }
 
 body {
@@ -69,11 +84,14 @@ body {
         repeat: no-repeat;
         position: 82% 100%, center center;
         size: 1200px, cover;
-
-        //TODO media query background
     }
 
-    ;
+    @media only screen and (min-width: $bp-desktop) {
+        background: {
+            position: bottom center, top center;
+            size: contain, contain;
+        }
+    }
 }
 
 .container {
@@ -84,10 +102,7 @@ body {
 
     .header {
         color: var(--white);
-
-        font: {
-            size: 1.8rem;
-        }
+        font-size: 1.8rem;
 
         text: {
             align: center;
@@ -97,6 +112,12 @@ body {
         letter-spacing: 0.5rem;
         margin-bottom: 6rem;
 
+        @media only screen and (min-width: $bp-desktop) {
+            font-size: 2.2rem;
+            letter-spacing: 0.75rem;
+            margin-bottom: 10rem;
+        }
+
     }
 
     .flip-clock {
@@ -104,6 +125,10 @@ body {
         grid-template-columns: repeat(4, 1fr);
         justify-content: space-between;
         gap: 1.5rem;
+
+        @media only screen and (min-width: $bp-desktop) {
+                gap: 3.4rem;
+            }
 
         .days-card,
         .hours-card,
@@ -113,6 +138,12 @@ body {
             height: var(--card-height);
             display: inline-flex;
             box-shadow: 2px 7px 0 hsl(240, 15%, 12%);
+
+            @media only screen and (min-width: $bp-desktop) {
+                width: var(--card-width-xl);
+                height: var(--card-height-xl);
+                //TODO box-shadow cards
+            }
         }
 
         // Card points
@@ -127,27 +158,42 @@ body {
         .seconds .flip-display-bottom::after
         {
             content: "";
-            width: 10px;
-            height: 10px;
-            top: -5px;
+            width: var(--flip-display-bottom-point-width);
+            height: var(--flip-display-bottom-point-height);
+            top: calc(var(--flip-display-bottom-point-height) * -0.5);
             position: absolute;
             border-radius: 50%;
             background: #191a24;
             z-index: 1000;
+
+            @media only screen and (min-width:$bp-desktop) {
+                width: var(--flip-display-bottom-point-width-xl);
+                height: var(--flip-display-bottom-point-height-xl);
+                top: calc(var(--flip-display-bottom-point-height-xl) * -0.5);
+            }
         }
 
         .days .flip-display-bottom::before,
         .hours .flip-display-bottom::before,
         .minutes .flip-display-bottom::before,
         .seconds .flip-display-bottom::before {
-            left: -5px;
+            left: calc(var(--flip-display-bottom-point-width) * -0.5);
+
+            @media only screen and (min-width: $bp-desktop) {
+                left: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
+            }
         }
 
         .days .flip-display-bottom::after,
         .hours .flip-display-bottom::after,
         .minutes .flip-display-bottom::after,
         .seconds .flip-display-bottom::after {
-            right: -5px;
+
+            right: calc(var(--flip-display-bottom-point-width) * -0.5);
+
+            @media only screen and (min-width: $bp-desktop) {
+                right: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
+            }
         }
 
         .desc {
@@ -161,6 +207,11 @@ body {
 
             text-transform: uppercase;
             letter-spacing: .3rem;
+
+            @media only screen and (min-width: $bp-desktop) {
+                font-size: 1.4rem;
+                letter-spacing: .6rem;
+            }
         }
 
 
@@ -176,6 +227,13 @@ body {
 
             position: relative;
 
+            @media screen and (min-width: $bp-desktop) {
+                height: var(--flip-height-xl);
+                width: var(--flip-width-xl);
+                border-radius: var(--flip-border-radius-xl);
+                font-size: calc(var(--flip-height-xl) * 0.5);
+            }
+
 
             &-display {
                 height: var(--flip-height);
@@ -183,6 +241,11 @@ body {
                 display: flex;
                 flex-direction: column;
                 z-index: 1;
+
+                @media screen and (min-width: $bp-desktop) {
+                    height: var(--flip-height-xl);
+                    width: var(--flip-width-xl);
+                }
 
 
                 &-top,
@@ -195,6 +258,11 @@ body {
                     background-color: var(--flip-container-color);
                     color: var(--flip-text-color);
                     line-height: calc(var(--line-height) * var(--i)); // Property i will be defined later
+                    
+                    @media screen and (min-width: $bp-desktop) {
+                        height: calc(var(--flip-height-xl) * 0.5);
+                        line-height: calc(var(--line-height-xl) * var(--i));
+                    }
                 }
 
                 &-top {
@@ -202,6 +270,11 @@ body {
                     --i: 2;
                     border-top-left-radius: var(--flip-border-radius);
                     border-top-right-radius: var(--flip-border-radius);
+
+                    @media only screen and (min-width: $bp-desktop) {
+                        border-top-left-radius: var(--flip-border-radius-xl);
+                        border-top-right-radius: var(--flip-border-radius-xl);
+                    }
                     
                     //border-bottom: 1px solid #191a24;
                     background-color: hsl(237, 18%, 20%);
@@ -212,7 +285,13 @@ body {
                     --i: 0;
                     border-bottom-left-radius: var(--flip-border-radius);
                     border-bottom-right-radius: var(--flip-border-radius);
+
+                    @media only screen and (min-width: $bp-desktop) {
+                        border-bottom-left-radius: var(--flip-border-radius-xl);
+                        border-bottom-right-radius: var(--flip-border-radius-xl);
+                    }
                 }
+
             }
 
             & .flipper {
@@ -228,12 +307,18 @@ body {
                 width: var(--flip-width);
                 perspective: var(--perspective);
 
+                @media only screen and (min-width: $bp-desktop) {
+                    height: var(--flip-height-xl);
+                    width: var(--flip-width-xl);
+                    //TODO perspective
+                }
+
                 &-top,
                 &-bottom {
                     position: absolute;
                     left: -10%; // negative percentage for better alignment
                     right: -10%;
-                    height: calc(var(--flip-height) *.5);
+                    height: calc(var(--flip-height) * 0.5);
                     width: var(--flip-width);
                     margin: auto;
                     text-align: center;
@@ -241,6 +326,12 @@ body {
                     overflow: hidden;
                     background-color: var(--flip-color);
                     color: var(--flip-text-color);
+
+                    @media only screen and (min-width: $bp-desktop) {
+                        height: calc(var(--flip-height-xl) * 0.5);
+                        width: var(--flip-width-xl);
+                        line-height: calc(var(--line-height-xl) * var(--i));
+                    }
 
                 }
 
@@ -255,9 +346,16 @@ body {
                     border-top-left-radius: var(--flip-border-radius);
                     border-top-right-radius: var(--flip-border-radius);
 
-                    //border-bottom: 1px solid #191a24;
-                        background-color: hsl(237, 18%, 20%);
+                    background-color: hsl(237, 18%, 20%);
                         box-shadow: 0 -5px 2px var(--very-dark-mostly-black-blue);
+
+                    @media only screen and (min-width: $bp-desktop) {
+                        border-top-left-radius: var(--flip-border-radius-xl);
+                        border-top-right-radius: var(--flip-border-radius-xl);
+                        //TODO box-shadow flipper-top
+                    }
+
+                    
                 }
 
                 &-bottom {
@@ -271,6 +369,11 @@ body {
                     // During animation we'll need to rotate from 90deg to 0deg
                     border-bottom-left-radius: var(--flip-border-radius);
                     border-bottom-right-radius: var(--flip-border-radius);
+
+                    @media only screen and (min-width: $bp-desktop) {
+                        border-bottom-left-radius: var(--flip-border-radius-xl);
+                        border-bottom-right-radius: var(--flip-border-radius-xl);
+                    }
                 }
 
             }
