@@ -20,8 +20,8 @@
   --flip-width-xl: var(--card-width-xl);
   --line-height-xl: calc(var(--flip-height-xl) * 0.5);
   --flip-border-radius-xl: calc(var(--flip-height-xl) * 0.05);
-  --flip-display-bottom-point-width-xl: 20px;
-  --flip-display-bottom-point-height-xl: 20px;
+  --flip-display-bottom-point-width-xl: 12px;
+  --flip-display-bottom-point-height-xl: 12px;
   --grayish-blue: hsl(237, 18%, 59%);
   --soft-red: hsl(345, 95%, 68%);
   --white: hsl(0, 0%, 100%);
@@ -109,6 +109,7 @@ body {
 .container .flip-clock .hours-card,
 .container .flip-clock .minutes-card,
 .container .flip-clock .seconds-card {
+  position: relative;
   width: var(--card-width);
   height: var(--card-height);
   display: inline-flex;
@@ -123,62 +124,62 @@ body {
     height: var(--card-height-xl);
   }
 }
-.container .flip-clock .days .flip-display-bottom::before,
-.container .flip-clock .hours .flip-display-bottom::before,
-.container .flip-clock .minutes .flip-display-bottom::before,
-.container .flip-clock .seconds .flip-display-bottom::before,
-.container .flip-clock .days .flip-display-bottom::after,
-.container .flip-clock .hours .flip-display-bottom::after,
-.container .flip-clock .minutes .flip-display-bottom::after,
-.container .flip-clock .seconds .flip-display-bottom::after {
+.container .flip-clock .days-card::before,
+.container .flip-clock .hours-card::before,
+.container .flip-clock .minutes-card::before,
+.container .flip-clock .seconds-card::before,
+.container .flip-clock .days-card::after,
+.container .flip-clock .hours-card::after,
+.container .flip-clock .minutes-card::after,
+.container .flip-clock .seconds-card::after {
   content: "";
   width: var(--flip-display-bottom-point-width);
   height: var(--flip-display-bottom-point-height);
-  top: calc(var(--flip-display-bottom-point-height) * -0.5);
+  top: calc(var(--card-height) * 0.5 - var(--flip-display-bottom-point-height) * 0.5);
   position: absolute;
   border-radius: 50%;
   background: #191a24;
   z-index: 1000;
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .days .flip-display-bottom::before,
-.container .flip-clock .hours .flip-display-bottom::before,
-.container .flip-clock .minutes .flip-display-bottom::before,
-.container .flip-clock .seconds .flip-display-bottom::before,
-.container .flip-clock .days .flip-display-bottom::after,
-.container .flip-clock .hours .flip-display-bottom::after,
-.container .flip-clock .minutes .flip-display-bottom::after,
-.container .flip-clock .seconds .flip-display-bottom::after {
+  .container .flip-clock .days-card::before,
+.container .flip-clock .hours-card::before,
+.container .flip-clock .minutes-card::before,
+.container .flip-clock .seconds-card::before,
+.container .flip-clock .days-card::after,
+.container .flip-clock .hours-card::after,
+.container .flip-clock .minutes-card::after,
+.container .flip-clock .seconds-card::after {
     width: var(--flip-display-bottom-point-width-xl);
     height: var(--flip-display-bottom-point-height-xl);
-    top: calc(var(--flip-display-bottom-point-height-xl) * -0.5);
+    top: calc(var(--card-height-xl) * 0.5 - var(--flip-display-bottom-point-height-xl) * 0.5);
   }
 }
-.container .flip-clock .days .flip-display-bottom::before,
-.container .flip-clock .hours .flip-display-bottom::before,
-.container .flip-clock .minutes .flip-display-bottom::before,
-.container .flip-clock .seconds .flip-display-bottom::before {
+.container .flip-clock .days-card::before,
+.container .flip-clock .hours-card::before,
+.container .flip-clock .minutes-card::before,
+.container .flip-clock .seconds-card::before {
   left: calc(var(--flip-display-bottom-point-width) * -0.5);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .days .flip-display-bottom::before,
-.container .flip-clock .hours .flip-display-bottom::before,
-.container .flip-clock .minutes .flip-display-bottom::before,
-.container .flip-clock .seconds .flip-display-bottom::before {
+  .container .flip-clock .days-card::before,
+.container .flip-clock .hours-card::before,
+.container .flip-clock .minutes-card::before,
+.container .flip-clock .seconds-card::before {
     left: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
   }
 }
-.container .flip-clock .days .flip-display-bottom::after,
-.container .flip-clock .hours .flip-display-bottom::after,
-.container .flip-clock .minutes .flip-display-bottom::after,
-.container .flip-clock .seconds .flip-display-bottom::after {
+.container .flip-clock .days-card::after,
+.container .flip-clock .hours-card::after,
+.container .flip-clock .minutes-card::after,
+.container .flip-clock .seconds-card::after {
   right: calc(var(--flip-display-bottom-point-width) * -0.5);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .days .flip-display-bottom::after,
-.container .flip-clock .hours .flip-display-bottom::after,
-.container .flip-clock .minutes .flip-display-bottom::after,
-.container .flip-clock .seconds .flip-display-bottom::after {
+  .container .flip-clock .days-card::after,
+.container .flip-clock .hours-card::after,
+.container .flip-clock .minutes-card::after,
+.container .flip-clock .seconds-card::after {
     right: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
   }
 }

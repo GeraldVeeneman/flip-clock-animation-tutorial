@@ -22,8 +22,8 @@
     --flip-width-xl: var(--card-width-xl);
     --line-height-xl: calc(var(--flip-height-xl) * 0.5);
     --flip-border-radius-xl: calc(var(--flip-height-xl) * 0.05);
-    --flip-display-bottom-point-width-xl: 20px;
-    --flip-display-bottom-point-height-xl: 20px;
+    --flip-display-bottom-point-width-xl: 12px;
+    --flip-display-bottom-point-height-xl: 12px;
     // TODO box-shadow
     // TODO perspective
 
@@ -88,8 +88,8 @@ body {
 
     @media only screen and (min-width: $bp-desktop) {
         background: {
-            position: bottom center, top center;
-            size: contain, contain;
+        position: bottom center, top center;
+        size: contain, contain;
         }
     }
 }
@@ -134,6 +134,7 @@ body {
         .hours-card,
         .minutes-card,
         .seconds-card {
+            position: relative;
             width: var(--card-width);
             height: var(--card-height);
             display: inline-flex;
@@ -147,20 +148,20 @@ body {
         }
 
         // Card points
-        .days .flip-display-bottom::before,
-        .hours .flip-display-bottom::before,
-        .minutes .flip-display-bottom::before,
-        .seconds .flip-display-bottom::before,
+        .days-card::before,
+        .hours-card::before,
+        .minutes-card::before,
+        .seconds-card::before,
         
-        .days .flip-display-bottom::after,
-        .hours .flip-display-bottom::after,
-        .minutes .flip-display-bottom::after,
-        .seconds .flip-display-bottom::after
+        .days-card::after,
+        .hours-card::after,
+        .minutes-card::after,
+        .seconds-card::after
         {
             content: "";
             width: var(--flip-display-bottom-point-width);
             height: var(--flip-display-bottom-point-height);
-            top: calc(var(--flip-display-bottom-point-height) * -0.5);
+            top: calc((var(--card-height) * 0.5) - (var(--flip-display-bottom-point-height) * 0.5));
             position: absolute;
             border-radius: 50%;
             background: #191a24;
@@ -169,14 +170,14 @@ body {
             @media only screen and (min-width:$bp-desktop) {
                 width: var(--flip-display-bottom-point-width-xl);
                 height: var(--flip-display-bottom-point-height-xl);
-                top: calc(var(--flip-display-bottom-point-height-xl) * -0.5);
+                top: calc((var(--card-height-xl) * 0.5) - (var(--flip-display-bottom-point-height-xl) * 0.5));
             }
         }
 
-        .days .flip-display-bottom::before,
-        .hours .flip-display-bottom::before,
-        .minutes .flip-display-bottom::before,
-        .seconds .flip-display-bottom::before {
+        .days-card::before,
+        .hours-card::before,
+        .minutes-card::before,
+        .seconds-card::before {
             left: calc(var(--flip-display-bottom-point-width) * -0.5);
 
             @media only screen and (min-width: $bp-desktop) {
@@ -184,10 +185,10 @@ body {
             }
         }
 
-        .days .flip-display-bottom::after,
-        .hours .flip-display-bottom::after,
-        .minutes .flip-display-bottom::after,
-        .seconds .flip-display-bottom::after {
+        .days-card::after,
+        .hours-card::after,
+        .minutes-card::after,
+        .seconds-card::after {
 
             right: calc(var(--flip-display-bottom-point-width) * -0.5);
 
