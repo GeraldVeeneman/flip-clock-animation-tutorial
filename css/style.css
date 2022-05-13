@@ -1,27 +1,27 @@
-/* Colours */
 :root {
   --card-height: 7rem;
   --card-width: 7rem;
+  --countdown-border-radius: calc(var(--card-height) * 0.05);
   --flip-height: var(--card-height);
   --flip-width: var(--card-width);
   --line-height: calc(var(--flip-height) * 0.5);
   --flip-container-color: var(--dark-desaturated-blue);
   --flip-color: var(--dark-desaturated-blue);
   --flip-text-color: var(--soft-red);
-  --flip-border-radius: calc(var(--flip-height) * 0.05);
-  --flip-display-bottom-point-width: 10px;
-  --flip-display-bottom-point-height: 10px;
+  --card-point-width: 10px;
+  --card-point-height: 10px;
   --animation-time: 0.8s;
   --animation-ease: linear;
-  --perspective: 20rem;
+  --perspective: 30rem;
+  --box-shadow-color: hsl(240, 15%, 12%);
   --card-height-xl: 14.7rem;
   --card-width-xl: 14.7rem;
   --flip-height-xl: var(--card-height-xl);
   --flip-width-xl: var(--card-width-xl);
   --line-height-xl: calc(var(--flip-height-xl) * 0.5);
-  --flip-border-radius-xl: calc(var(--flip-height-xl) * 0.05);
-  --flip-display-bottom-point-width-xl: 12px;
-  --flip-display-bottom-point-height-xl: 12px;
+  --countdown-border-radius-xl: calc(var(--flip-height-xl) * 0.05);
+  --card-point-width-xl: 12px;
+  --card-point-height-xl: 12px;
   --grayish-blue: hsl(237, 18%, 59%);
   --soft-red: hsl(345, 95%, 68%);
   --white: hsl(0, 0%, 100%);
@@ -94,96 +94,99 @@ body {
     margin-bottom: 10rem;
   }
 }
-.container .flip-clock {
+.container .countdown {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
   gap: 1.5rem;
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock {
+  .container .countdown {
     gap: 3.4rem;
   }
 }
-.container .flip-clock .days-card,
-.container .flip-clock .hours-card,
-.container .flip-clock .minutes-card,
-.container .flip-clock .seconds-card {
+.container .countdown .days-card,
+.container .countdown .hours-card,
+.container .countdown .minutes-card,
+.container .countdown .seconds-card {
   position: relative;
   width: var(--card-width);
   height: var(--card-height);
   display: inline-flex;
-  box-shadow: 2px 7px 0 hsl(240deg, 15%, 12%);
+  box-shadow: 0 var(--countdown-border-radius) 0 0 var(--box-shadow-color);
+  border-radius: var(--countdown-border-radius);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .days-card,
-.container .flip-clock .hours-card,
-.container .flip-clock .minutes-card,
-.container .flip-clock .seconds-card {
+  .container .countdown .days-card,
+.container .countdown .hours-card,
+.container .countdown .minutes-card,
+.container .countdown .seconds-card {
     width: var(--card-width-xl);
     height: var(--card-height-xl);
+    box-shadow: 0 var(--countdown-border-radius-xl) 0 0 var(--box-shadow-color);
+    border-radius: var(--countdown-border-radius-xl);
   }
 }
-.container .flip-clock .days-card::before,
-.container .flip-clock .hours-card::before,
-.container .flip-clock .minutes-card::before,
-.container .flip-clock .seconds-card::before,
-.container .flip-clock .days-card::after,
-.container .flip-clock .hours-card::after,
-.container .flip-clock .minutes-card::after,
-.container .flip-clock .seconds-card::after {
+.container .countdown .days-card::before,
+.container .countdown .hours-card::before,
+.container .countdown .minutes-card::before,
+.container .countdown .seconds-card::before,
+.container .countdown .days-card::after,
+.container .countdown .hours-card::after,
+.container .countdown .minutes-card::after,
+.container .countdown .seconds-card::after {
   content: "";
-  width: var(--flip-display-bottom-point-width);
-  height: var(--flip-display-bottom-point-height);
-  top: calc(var(--card-height) * 0.5 - var(--flip-display-bottom-point-height) * 0.5);
+  width: var(--card-point-width);
+  height: var(--card-point-height);
+  top: calc(var(--card-height) * 0.5 - var(--card-point-height) * 0.5);
   position: absolute;
   border-radius: 50%;
   background: #191a24;
   z-index: 1000;
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .days-card::before,
-.container .flip-clock .hours-card::before,
-.container .flip-clock .minutes-card::before,
-.container .flip-clock .seconds-card::before,
-.container .flip-clock .days-card::after,
-.container .flip-clock .hours-card::after,
-.container .flip-clock .minutes-card::after,
-.container .flip-clock .seconds-card::after {
-    width: var(--flip-display-bottom-point-width-xl);
-    height: var(--flip-display-bottom-point-height-xl);
-    top: calc(var(--card-height-xl) * 0.5 - var(--flip-display-bottom-point-height-xl) * 0.5);
+  .container .countdown .days-card::before,
+.container .countdown .hours-card::before,
+.container .countdown .minutes-card::before,
+.container .countdown .seconds-card::before,
+.container .countdown .days-card::after,
+.container .countdown .hours-card::after,
+.container .countdown .minutes-card::after,
+.container .countdown .seconds-card::after {
+    width: var(--card-point-width-xl);
+    height: var(--card-point-height-xl);
+    top: calc(var(--card-height-xl) * 0.5 - var(--card-point-height-xl) * 0.5);
   }
 }
-.container .flip-clock .days-card::before,
-.container .flip-clock .hours-card::before,
-.container .flip-clock .minutes-card::before,
-.container .flip-clock .seconds-card::before {
-  left: calc(var(--flip-display-bottom-point-width) * -0.5);
+.container .countdown .days-card::before,
+.container .countdown .hours-card::before,
+.container .countdown .minutes-card::before,
+.container .countdown .seconds-card::before {
+  left: calc(var(--card-point-width) * -0.5);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .days-card::before,
-.container .flip-clock .hours-card::before,
-.container .flip-clock .minutes-card::before,
-.container .flip-clock .seconds-card::before {
-    left: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
+  .container .countdown .days-card::before,
+.container .countdown .hours-card::before,
+.container .countdown .minutes-card::before,
+.container .countdown .seconds-card::before {
+    left: calc(var(--card-point-width-xl) * -0.5);
   }
 }
-.container .flip-clock .days-card::after,
-.container .flip-clock .hours-card::after,
-.container .flip-clock .minutes-card::after,
-.container .flip-clock .seconds-card::after {
-  right: calc(var(--flip-display-bottom-point-width) * -0.5);
+.container .countdown .days-card::after,
+.container .countdown .hours-card::after,
+.container .countdown .minutes-card::after,
+.container .countdown .seconds-card::after {
+  right: calc(var(--card-point-width) * -0.5);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .days-card::after,
-.container .flip-clock .hours-card::after,
-.container .flip-clock .minutes-card::after,
-.container .flip-clock .seconds-card::after {
-    right: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
+  .container .countdown .days-card::after,
+.container .countdown .hours-card::after,
+.container .countdown .minutes-card::after,
+.container .countdown .seconds-card::after {
+    right: calc(var(--card-point-width-xl) * -0.5);
   }
 }
-.container .flip-clock .desc {
+.container .countdown .desc {
   justify-self: center;
   color: var(--grayish-blue);
   font-size: 0.7rem;
@@ -192,28 +195,28 @@ body {
   letter-spacing: 0.3rem;
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .desc {
+  .container .countdown .desc {
     font-size: 1.4rem;
     letter-spacing: 0.6rem;
   }
 }
-.container .flip-clock .flip {
+.container .countdown .flip {
   height: var(--flip-height);
   width: var(--flip-width);
-  border-radius: var(--flip-border-radius);
+  border-radius: var(--countdown-border-radius);
   font-size: calc(var(--flip-height) * 0.5);
   font-weight: 700;
   position: relative;
 }
 @media screen and (min-width: 1200px) {
-  .container .flip-clock .flip {
+  .container .countdown .flip {
     height: var(--flip-height-xl);
     width: var(--flip-width-xl);
-    border-radius: var(--flip-border-radius-xl);
+    border-radius: var(--countdown-border-radius-xl);
     font-size: calc(var(--flip-height-xl) * 0.5);
   }
 }
-.container .flip-clock .flip-display {
+.container .countdown .flip-display {
   height: var(--flip-height);
   width: var(--flip-width);
   display: flex;
@@ -221,12 +224,12 @@ body {
   z-index: 1;
 }
 @media screen and (min-width: 1200px) {
-  .container .flip-clock .flip-display {
+  .container .countdown .flip-display {
     height: var(--flip-height-xl);
     width: var(--flip-width-xl);
   }
 }
-.container .flip-clock .flip-display-top, .container .flip-clock .flip-display-bottom {
+.container .countdown .flip-display-top, .container .countdown .flip-display-bottom {
   position: relative;
   text-align: center;
   overflow: hidden;
@@ -237,35 +240,37 @@ body {
   line-height: calc(var(--line-height) * var(--i));
 }
 @media screen and (min-width: 1200px) {
-  .container .flip-clock .flip-display-top, .container .flip-clock .flip-display-bottom {
+  .container .countdown .flip-display-top, .container .countdown .flip-display-bottom {
     height: calc(var(--flip-height-xl) * 0.5);
     line-height: calc(var(--line-height-xl) * var(--i));
   }
 }
-.container .flip-clock .flip-display-top {
+.container .countdown .flip-display-top {
   --i: 2;
-  border-top-left-radius: var(--flip-border-radius);
-  border-top-right-radius: var(--flip-border-radius);
+  border-top-left-radius: var(--countdown-border-radius);
+  border-top-right-radius: var(--countdown-border-radius);
+  box-shadow: 0 -5px 2px var(--box-shadow-color);
   background-color: hsl(237deg, 18%, 20%);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .flip-display-top {
-    border-top-left-radius: var(--flip-border-radius-xl);
-    border-top-right-radius: var(--flip-border-radius-xl);
+  .container .countdown .flip-display-top {
+    border-top-left-radius: var(--countdown-border-radius-xl);
+    border-top-right-radius: var(--countdown-border-radius-xl);
   }
 }
-.container .flip-clock .flip-display-bottom {
+.container .countdown .flip-display-bottom {
   --i: 0;
-  border-bottom-left-radius: var(--flip-border-radius);
-  border-bottom-right-radius: var(--flip-border-radius);
+  border-bottom-left-radius: var(--countdown-border-radius);
+  border-bottom-right-radius: var(--countdown-border-radius);
+  box-shadow: 0 5px 2px var(--box-shadow-color);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .flip-display-bottom {
-    border-bottom-left-radius: var(--flip-border-radius-xl);
-    border-bottom-right-radius: var(--flip-border-radius-xl);
+  .container .countdown .flip-display-bottom {
+    border-bottom-left-radius: var(--countdown-border-radius-xl);
+    border-bottom-right-radius: var(--countdown-border-radius-xl);
   }
 }
-.container .flip-clock .flip .flipper {
+.container .countdown .flip .flipper {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -277,12 +282,12 @@ body {
   perspective: var(--perspective);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .flip .flipper {
+  .container .countdown .flip .flipper {
     height: var(--flip-height-xl);
     width: var(--flip-width-xl);
   }
 }
-.container .flip-clock .flip .flipper-top, .container .flip-clock .flip .flipper-bottom {
+.container .countdown .flip .flipper-top, .container .countdown .flip .flipper-bottom {
   position: absolute;
   left: -10%;
   right: -10%;
@@ -296,46 +301,47 @@ body {
   color: var(--flip-text-color);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .flip .flipper-top, .container .flip-clock .flip .flipper-bottom {
+  .container .countdown .flip .flipper-top, .container .countdown .flip .flipper-bottom {
     height: calc(var(--flip-height-xl) * 0.5);
     width: var(--flip-width-xl);
     line-height: calc(var(--line-height-xl) * var(--i));
   }
 }
-.container .flip-clock .flip .flipper-top {
+.container .countdown .flip .flipper-top {
   --i: 2;
   top: 0;
   transform-origin: bottom;
   transform: rotateX(-90deg);
-  border-top-left-radius: var(--flip-border-radius);
-  border-top-right-radius: var(--flip-border-radius);
+  border-top-left-radius: var(--countdown-border-radius);
+  border-top-right-radius: var(--countdown-border-radius);
   background-color: hsl(237deg, 18%, 20%);
-  box-shadow: 0 -5px 2px var(--very-dark-mostly-black-blue);
+  box-shadow: 0 -5px 2px var(--box-shadow-color);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .flip .flipper-top {
-    border-top-left-radius: var(--flip-border-radius-xl);
-    border-top-right-radius: var(--flip-border-radius-xl);
+  .container .countdown .flip .flipper-top {
+    border-top-left-radius: var(--countdown-border-radius-xl);
+    border-top-right-radius: var(--countdown-border-radius-xl);
   }
 }
-.container .flip-clock .flip .flipper-bottom {
+.container .countdown .flip .flipper-bottom {
   --i: 0;
   transform: rotateX(90deg);
   transform-origin: top;
   bottom: 0;
-  border-bottom-left-radius: var(--flip-border-radius);
-  border-bottom-right-radius: var(--flip-border-radius);
+  border-bottom-left-radius: var(--countdown-border-radius);
+  border-bottom-right-radius: var(--countdown-border-radius);
+  box-shadow: 0 5px 2px var(--box-shadow-color);
 }
 @media only screen and (min-width: 1200px) {
-  .container .flip-clock .flip .flipper-bottom {
-    border-bottom-left-radius: var(--flip-border-radius-xl);
-    border-bottom-right-radius: var(--flip-border-radius-xl);
+  .container .countdown .flip .flipper-bottom {
+    border-bottom-left-radius: var(--countdown-border-radius-xl);
+    border-bottom-right-radius: var(--countdown-border-radius-xl);
   }
 }
-.container .flip-clock .flip.play .flipper-top {
+.container .countdown .flip.play .flipper-top {
   animation: flipperTopAnimation var(--animation-time) var(--animation-ease);
 }
-.container .flip-clock .flip.play .flipper-bottom {
+.container .countdown .flip.play .flipper-bottom {
   animation: flipperBottomAnimation var(--animation-time) var(--animation-ease);
 }
 .container .footer {

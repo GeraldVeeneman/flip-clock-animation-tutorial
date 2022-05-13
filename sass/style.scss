@@ -1,19 +1,19 @@
-/* Colours */
 :root {
     --card-height: 7rem;
     --card-width: 7rem;
+    --countdown-border-radius: calc(var(--card-height) * 0.05);
     --flip-height: var(--card-height);
     --flip-width: var(--card-width);
     --line-height: calc(var(--flip-height) * 0.5);
     --flip-container-color: var(--dark-desaturated-blue);
     --flip-color: var(--dark-desaturated-blue);
     --flip-text-color: var(--soft-red);
-    --flip-border-radius: calc(var(--flip-height) * 0.05);
-    --flip-display-bottom-point-width: 10px;
-    --flip-display-bottom-point-height: 10px;
+    --card-point-width: 10px;
+    --card-point-height: 10px;
     --animation-time: 0.8s;
     --animation-ease: linear;
-    --perspective: 20rem;
+    --perspective: 30rem;
+    --box-shadow-color: hsl(240, 15%, 12%);
     
     // Variables desktop layout (xl >= 1200px)
     --card-height-xl: 14.7rem;
@@ -21,11 +21,9 @@
     --flip-height-xl: var(--card-height-xl);
     --flip-width-xl: var(--card-width-xl);
     --line-height-xl: calc(var(--flip-height-xl) * 0.5);
-    --flip-border-radius-xl: calc(var(--flip-height-xl) * 0.05);
-    --flip-display-bottom-point-width-xl: 12px;
-    --flip-display-bottom-point-height-xl: 12px;
-    // TODO box-shadow
-    // TODO perspective
+    --countdown-border-radius-xl: calc(var(--flip-height-xl) * 0.05);
+    --card-point-width-xl: 12px;
+    --card-point-height-xl: 12px;
 
     // Colours from Frontend Mentor challenge
     // Primary
@@ -120,7 +118,7 @@ body {
 
     }
 
-    .flip-clock {
+    .countdown {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         justify-content: space-between;
@@ -138,12 +136,14 @@ body {
             width: var(--card-width);
             height: var(--card-height);
             display: inline-flex;
-            box-shadow: 2px 7px 0 hsl(240, 15%, 12%);
+            box-shadow: 0 var(--countdown-border-radius) 0 0 var(--box-shadow-color);
+            border-radius: var(--countdown-border-radius);
 
             @media only screen and (min-width: $bp-desktop) {
                 width: var(--card-width-xl);
                 height: var(--card-height-xl);
-                //TODO box-shadow cards
+                box-shadow: 0 var(--countdown-border-radius-xl) 0 0 var(--box-shadow-color);
+                border-radius: var(--countdown-border-radius-xl);
             }
         }
 
@@ -159,18 +159,18 @@ body {
         .seconds-card::after
         {
             content: "";
-            width: var(--flip-display-bottom-point-width);
-            height: var(--flip-display-bottom-point-height);
-            top: calc((var(--card-height) * 0.5) - (var(--flip-display-bottom-point-height) * 0.5));
+            width: var(--card-point-width);
+            height: var(--card-point-height);
+            top: calc((var(--card-height) * 0.5) - (var(--card-point-height) * 0.5));
             position: absolute;
             border-radius: 50%;
             background: #191a24;
             z-index: 1000;
 
             @media only screen and (min-width:$bp-desktop) {
-                width: var(--flip-display-bottom-point-width-xl);
-                height: var(--flip-display-bottom-point-height-xl);
-                top: calc((var(--card-height-xl) * 0.5) - (var(--flip-display-bottom-point-height-xl) * 0.5));
+                width: var(--card-point-width-xl);
+                height: var(--card-point-height-xl);
+                top: calc((var(--card-height-xl) * 0.5) - (var(--card-point-height-xl) * 0.5));
             }
         }
 
@@ -178,10 +178,10 @@ body {
         .hours-card::before,
         .minutes-card::before,
         .seconds-card::before {
-            left: calc(var(--flip-display-bottom-point-width) * -0.5);
+            left: calc(var(--card-point-width) * -0.5);
 
             @media only screen and (min-width: $bp-desktop) {
-                left: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
+                left: calc(var(--card-point-width-xl) * -0.5);
             }
         }
 
@@ -190,10 +190,10 @@ body {
         .minutes-card::after,
         .seconds-card::after {
 
-            right: calc(var(--flip-display-bottom-point-width) * -0.5);
+            right: calc(var(--card-point-width) * -0.5);
 
             @media only screen and (min-width: $bp-desktop) {
-                right: calc(var(--flip-display-bottom-point-width-xl) * -0.5);
+                right: calc(var(--card-point-width-xl) * -0.5);
             }
         }
 
@@ -219,7 +219,7 @@ body {
         .flip {
             height: var(--flip-height);
             width: var(--flip-width);
-            border-radius: var(--flip-border-radius);
+            border-radius: var(--countdown-border-radius);
 
             font: {
                 size: calc(var(--flip-height) * 0.5); // Half size of the flip height
@@ -231,7 +231,7 @@ body {
             @media screen and (min-width: $bp-desktop) {
                 height: var(--flip-height-xl);
                 width: var(--flip-width-xl);
-                border-radius: var(--flip-border-radius-xl);
+                border-radius: var(--countdown-border-radius-xl);
                 font-size: calc(var(--flip-height-xl) * 0.5);
             }
 
@@ -269,27 +269,28 @@ body {
                 &-top {
                     // Based on the i property we'll align the line-height
                     --i: 2;
-                    border-top-left-radius: var(--flip-border-radius);
-                    border-top-right-radius: var(--flip-border-radius);
+                    border-top-left-radius: var(--countdown-border-radius);
+                    border-top-right-radius: var(--countdown-border-radius);
+                    box-shadow: 0 -5px 2px var(--box-shadow-color);
 
                     @media only screen and (min-width: $bp-desktop) {
-                        border-top-left-radius: var(--flip-border-radius-xl);
-                        border-top-right-radius: var(--flip-border-radius-xl);
+                        border-top-left-radius: var(--countdown-border-radius-xl);
+                        border-top-right-radius: var(--countdown-border-radius-xl);
                     }
                     
-                    //border-bottom: 1px solid #191a24;
                     background-color: hsl(237, 18%, 20%);
 
                 }
 
                 &-bottom {
                     --i: 0;
-                    border-bottom-left-radius: var(--flip-border-radius);
-                    border-bottom-right-radius: var(--flip-border-radius);
+                    border-bottom-left-radius: var(--countdown-border-radius);
+                    border-bottom-right-radius: var(--countdown-border-radius);
+                    box-shadow: 0 5px 2px var(--box-shadow-color);
 
                     @media only screen and (min-width: $bp-desktop) {
-                        border-bottom-left-radius: var(--flip-border-radius-xl);
-                        border-bottom-right-radius: var(--flip-border-radius-xl);
+                        border-bottom-left-radius: var(--countdown-border-radius-xl);
+                        border-bottom-right-radius: var(--countdown-border-radius-xl);
                     }
                 }
 
@@ -300,7 +301,6 @@ body {
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                //background-color: rgba(255, 0, 0, 0.75);
                 left: 0;
                 right: 0;
                 margin: auto;
@@ -311,7 +311,6 @@ body {
                 @media only screen and (min-width: $bp-desktop) {
                     height: var(--flip-height-xl);
                     width: var(--flip-width-xl);
-                    //TODO perspective
                 }
 
                 &-top,
@@ -344,16 +343,15 @@ body {
                     transform-origin: bottom;
                     transform: rotateX(-90deg);
                     // We'll animate the top part from 0deg to -90deg
-                    border-top-left-radius: var(--flip-border-radius);
-                    border-top-right-radius: var(--flip-border-radius);
+                    border-top-left-radius: var(--countdown-border-radius);
+                    border-top-right-radius: var(--countdown-border-radius);
 
                     background-color: hsl(237, 18%, 20%);
-                        box-shadow: 0 -5px 2px var(--very-dark-mostly-black-blue);
+                    box-shadow: 0 -5px 2px var(--box-shadow-color);
 
                     @media only screen and (min-width: $bp-desktop) {
-                        border-top-left-radius: var(--flip-border-radius-xl);
-                        border-top-right-radius: var(--flip-border-radius-xl);
-                        //TODO box-shadow flipper-top
+                        border-top-left-radius: var(--countdown-border-radius-xl);
+                        border-top-right-radius: var(--countdown-border-radius-xl);
                     }
 
                     
@@ -368,12 +366,13 @@ body {
                     transform-origin: top;
                     bottom: 0;
                     // During animation we'll need to rotate from 90deg to 0deg
-                    border-bottom-left-radius: var(--flip-border-radius);
-                    border-bottom-right-radius: var(--flip-border-radius);
+                    border-bottom-left-radius: var(--countdown-border-radius);
+                    border-bottom-right-radius: var(--countdown-border-radius);
+                    box-shadow: 0 5px 2px var(--box-shadow-color);
 
                     @media only screen and (min-width: $bp-desktop) {
-                        border-bottom-left-radius: var(--flip-border-radius-xl);
-                        border-bottom-right-radius: var(--flip-border-radius-xl);
+                        border-bottom-left-radius: var(--countdown-border-radius-xl);
+                        border-bottom-right-radius: var(--countdown-border-radius-xl);
                     }
                 }
 

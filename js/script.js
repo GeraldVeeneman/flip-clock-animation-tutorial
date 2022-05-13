@@ -31,7 +31,7 @@ $(document).ready(function () {
 
   // Assuming more than one flip clock on the page
 
-  $(".flip-clock").each(function (_, flipClock) {
+  $(".countdown").each(function (_, flipClock) {
 
     // Let's create the handles for the last and first digits of the seconds, minutes and hours
     const seconds = createHandles($(flipClock).find(".flip.seconds"));
