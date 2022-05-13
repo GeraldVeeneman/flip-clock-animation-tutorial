@@ -136,13 +136,13 @@ body {
             width: var(--card-width);
             height: var(--card-height);
             display: inline-flex;
-            box-shadow: 0 var(--countdown-border-radius) 0 0 var(--box-shadow-color);
+            box-shadow: 0 5px 0 0 var(--box-shadow-color);
             border-radius: var(--countdown-border-radius);
 
             @media only screen and (min-width: $bp-desktop) {
                 width: var(--card-width-xl);
                 height: var(--card-height-xl);
-                box-shadow: 0 var(--countdown-border-radius-xl) 0 0 var(--box-shadow-color);
+                box-shadow: 0 10px 0 0 var(--box-shadow-color);
                 border-radius: var(--countdown-border-radius-xl);
             }
         }
