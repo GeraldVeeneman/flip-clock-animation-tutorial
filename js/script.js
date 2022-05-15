@@ -1,25 +1,27 @@
 // TODO we need to create a function that returns the remaining time info in Object that holds the first and last digits of Days, Hours, Minutes and Seconds.
 
-function generateTimeInfo() {
+function getRemainingTime() {
 
-  // Calculate remaining time
-  const endDateObj = new Date("May 15 2022");  
+  // Create date objects and calculate remaining time object
+  const endDateObj = new Date("2022-05-15T14:15:00");
   const currentdateObj = new Date();
   const remainingObj = new Date(endDateObj - currentdateObj);
   
+  // Calculate total remaining time
+  const total = Date.parse(remainingObj);
   
-  // Calculate remaining days
-  const days = Math.floor(remainingObj / (1000 * 3600 * 24));
-  
-  const hrs = remainingObj.getHours();
-  const min = remainingObj.getMinutes();
-  const sec = remainingObj.getSeconds();
+  // Calculate remaining days, hours, minutes and seconds
+  const days = Math.floor(total / (1000 * 3600 * 24));
+  const hrs = Math.floor((total / (1000 * 60 * 60)) % 24);
+  const min = Math.floor((total / (1000 * 60)) % 60);
+  const sec = Math.floor((total / 1000) % 60);
 
   const daysDigits = ("0" + days).slice(-2);
   const hoursDigits = ("0" + hrs).slice(-2);
   const minutesDigits = ("0" + min).slice(-2);
   const secondsDigits = ("0" + sec).slice(-2);
   return {
+    total,
     daysDigits,
     hoursDigits,
     minutesDigits,
@@ -32,26 +34,33 @@ $(document).ready(function () {
   // Assuming more than one flip clock on the page
 
   $(".countdown").each(function (_, flipClock) {
-
-    // Let's create the handles for the last and first digits of the seconds, minutes and hours
+  
+    // Let's create the handles for the digits of the seconds, minutes and hours
     const seconds = createHandles($(flipClock).find(".flip.seconds"));
     const minutes = createHandles($(flipClock).find(".flip.minutes"));
     const hours = createHandles($(flipClock).find(".flip.hours"));
     const days = createHandles($(flipClock).find(".flip.days"));
 
-    const initialTime = generateTimeInfo();
+    const initialTime = getRemainingTime();
     setInitialValues(seconds, initialTime.secondsDigits);
     setInitialValues(minutes, initialTime.minutesDigits);
     setInitialValues(hours, initialTime.hoursDigits);
     setInitialValues(days, initialTime.daysDigits);
+
     // TODO Here we need to run the setInterval function
-   setInterval(() => {
-      const time = generateTimeInfo();
+    const timeInterval = setInterval(() => {
+      const t = getRemainingTime();
+
       // TODO -> Now we need to call the flipDigit function
-      flipDigit(seconds, time.secondsDigits);
-      flipDigit(minutes, time.minutesDigits);
-      flipDigit(hours, time.hoursDigits);
-      flipDigit(days, time.daysDigits);
+      flipDigit(seconds, t.secondsDigits);
+      flipDigit(minutes, t.minutesDigits);
+      flipDigit(hours, t.hoursDigits);
+      flipDigit(days, t.daysDigits);
+
+      // Als de overgebleven tijd nul wordt, stop dan de timer
+      if (t.total <= 0) {
+        clearInterval(timeInterval);
+      }
     }, 1000);
 
   });
