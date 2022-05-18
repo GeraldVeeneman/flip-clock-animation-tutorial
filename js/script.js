@@ -3,7 +3,7 @@
 function getRemainingTime() {
 
   // Create date objects and calculate remaining time object
-  const endDateObj = new Date("2022-05-15T14:15:00");
+  const endDateObj = new Date("2022-05-17T14:15:00");
   const currentdateObj = new Date();
   const remainingObj = new Date(endDateObj - currentdateObj);
   
